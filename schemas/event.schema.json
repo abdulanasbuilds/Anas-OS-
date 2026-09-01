@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/event.schema.json",
+  "type":"object",
+  "required":["id","type","occurredAt","source"],
+  "properties":{
+    "id":{"type":"string"},
+    "type":{"type":"string"},
+    "occurredAt":{"type":"string"},
+    "source":{"type":"string"},
+    "actor":{"type":"string"},
+    "projectId":{"type":"string"},
+    "entityType":{"type":"string"},
+    "entityId":{"type":"string"},
+    "payload":{"type":"object"},
+    "correlationId":{"type":"string"},
+    "sensitivity":{"enum":["public","internal","confidential","restricted"]}
+  }
+}
