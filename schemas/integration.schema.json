@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/integration.schema.json",
+  "type":"object",
+  "required":["id","provider","purpose","criticality","environment","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "provider":{"type":"string"},
+    "purpose":{"type":"string"},
+    "criticality":{"enum":["low","medium","high","critical"]},
+    "environment":{"enum":["local","development","preview","staging","production"]},
+    "authMethod":{"type":"string"},
+    "secretReference":{"type":"string"},
+    "webhooks":{"type":"array","items":{"type":"string"}},
+    "fallback":{"type":"string"},
+    "rateLimit":{"type":"string"},
+    "status":{"enum":["planned","sandbox","active","degraded","retired"]}
+  }
+}
