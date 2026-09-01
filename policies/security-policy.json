@@ -1,0 +1,8 @@
+{
+  "version":"0.1.0",
+  "principles":["least_privilege","defense_in_depth","fail_closed","explicit_authorization","auditability"],
+  "requiredControls":["authentication","authorization","input_validation","secret_management","tenant_isolation_when_multitenant","rate_limiting_for_abuse_prone_operations","audit_logging_for_sensitive_actions","backup_and_recovery_for_critical_data"],
+  "secretRules":{"sourceControl":"forbidden","logs":"forbidden","client_bundle":"forbidden","approvedSecretStores":"required"},
+  "incidentSeverity":{"critical":"active exploitation, credential exposure, major data loss or major availability impact","high":"material security weakness or serious abuse path","medium":"limited-impact weakness with realistic exploitation","low":"defense-in-depth improvement"},
+  "releaseRule":"A known critical security finding blocks release until remediated or explicitly accepted by the authorized human owner with documented compensating controls."
+}
