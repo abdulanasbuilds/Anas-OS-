@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/opportunity.schema.json",
+  "type":"object",
+  "required":["id","title","problemId","targetCustomer","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "title":{"type":"string"},
+    "problemId":{"type":"string"},
+    "targetCustomer":{"type":"string"},
+    "market":{"type":"string"},
+    "urgency":{"enum":["low","medium","high","critical"]},
+    "valuePotential":{"type":"string"},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "score":{"type":"number","minimum":0,"maximum":100},
+    "status":{"enum":["idea","researching","validated","approved","rejected","paused","converted"]},
+    "nextAction":{"type":"string"}
+  }
+}
