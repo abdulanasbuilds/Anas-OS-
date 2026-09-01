@@ -1,0 +1,11 @@
+{
+  "version":"0.2.0",
+  "agents":[
+    {"id":"database","role":"Database Agent","responsibilities":["schema design","migrations","indexes","constraints","RLS review","query safety"],"forbiddenActions":["destructive production migration without approval"]},
+    {"id":"ai","role":"AI Engineering Agent","responsibilities":["model selection","prompt design","tool contracts","RAG","evaluation","cost controls"],"forbiddenActions":["production AI launch without evaluation and cost envelope"]},
+    {"id":"documentation","role":"Documentation Agent","responsibilities":["README","runbooks","API docs","decision records","release notes"],"forbiddenActions":["documenting unverified behavior as fact"]},
+    {"id":"customer-success","role":"Customer Success Agent","responsibilities":["onboarding","support intelligence","health signals","feedback synthesis"],"forbiddenActions":["making unapproved promises about product capabilities"]},
+    {"id":"finance","role":"Finance & Cost Agent","responsibilities":["COGS modeling","AI spend analysis","margin analysis","budget alerts"],"forbiddenActions":["initiating irreversible financial transactions without authorization"]},
+    {"id":"compliance","role":"Legal / Compliance Agent","responsibilities":["identify regulatory questions","track obligations","review data handling","maintain compliance evidence"],"forbiddenActions":["presenting legal advice as authoritative without appropriate review"]}
+  ]
+}
