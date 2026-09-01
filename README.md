@@ -1,10 +1,50 @@
 # ANAS OS
 
-**ANAS OS is a decision-and-execution operating system for building and running a one-person technology company.**
+**ANAS OS is a unified decision-and-execution operating system for building, launching, operating, and improving technology businesses.**
 
-It is not merely an AI coding framework or a collection of prompts. It governs the full lifecycle from opportunity discovery through business validation, product definition, agent-assisted execution, verification, launch, operations, customer feedback, learning, and system improvement.
+It is one system, not a collection of separate operating systems. Business, product, engineering, AI, agent execution, data, research, customer, growth, security, finance, operations, and system evolution are native subsystems governed by the same constitutional core, schemas, policies, state, gates, evidence model, and learning loop.
 
-## Core model
+## The central rule
+
+> **One operating system. Many native subsystems. One source of truth.**
+
+An agent runtime is therefore not an independent "Agent OS". A dashboard is not a separate "Command OS". A Meta-OS is not a second authority. They are capabilities implemented inside ANAS OS.
+
+## What ANAS OS does
+
+```text
+OPPORTUNITY
+    ↓
+PROBLEM
+    ↓
+CUSTOMER + MARKET
+    ↓
+VALIDATION
+    ↓
+BUSINESS CASE
+    ↓
+PRODUCT DEFINITION
+    ↓
+ARCHITECTURE
+    ↓
+AGENT-ASSISTED EXECUTION
+    ↓
+VERIFICATION
+    ↓
+RELEASE
+    ↓
+OPERATIONS
+    ↓
+CUSTOMER FEEDBACK
+    ↓
+MEASUREMENT
+    ↓
+LEARNING
+    ↓
+SYSTEM IMPROVEMENT
+```
+
+## Universal decision loop
 
 ```text
 CONTEXT
@@ -34,131 +74,114 @@ LEARNING
 SYSTEM UPDATE
 ```
 
-## Architecture
+## Native architecture
 
-ANAS OS is organized into 36 control domains:
+ANAS OS is organized into 36 native control domains. The numbered domains are subsystems of the same operating system:
 
-- 00 Constitution
-- 01 Identity & Context OS
-- 02 Business OS
-- 03 Product OS
-- 04 Agent OS
-- 05 Engineering OS
-- 06 AI Engineering OS
-- 07 Project Templates
-- 08 Project OS
-- 09 Knowledge OS
-- 10 Operations OS
-- 11 Growth OS
-- 12 Finance & Cost OS
-- 13 Legal & Compliance OS
-- 14 Release OS
-- 15 Observability OS
-- 16 Evaluation OS
-- 17 Failure & Recovery OS
-- 18 Command Center
-- 19 Data OS
-- 20 Research & Intelligence OS
-- 21 Customer OS
-- 22 Integration OS
-- 23 Developer Experience OS
-- 24 Security Operations OS
-- 25 Communication OS
-- 26 Asset & Content OS
-- 27 Portfolio OS
-- 28 Experimentation OS
-- 29 Automation OS
-- 30 Environment & Infrastructure OS
-- 31 Procurement & Vendor OS
-- 32 Support & Service OS
-- 33 Business Continuity OS
-- 34 System Governance OS
-- 35 ANAS OS Meta-OS
+- `00` Constitution
+- `01` Identity & Context
+- `02` Business
+- `03` Product
+- `04` Agent Execution
+- `05` Engineering
+- `06` AI Engineering
+- `07` Project Templates
+- `08` Project Management
+- `09` Knowledge
+- `10` Operations
+- `11` Growth
+- `12` Finance & Cost
+- `13` Legal & Compliance
+- `14` Release
+- `15` Observability
+- `16` Evaluation
+- `17` Failure & Recovery
+- `18` Command Center data contracts
+- `19` Data
+- `20` Research & Intelligence
+- `21` Customer
+- `22` Integration
+- `23` Developer Experience
+- `24` Security Operations
+- `25` Communication
+- `26` Asset & Content
+- `27` Portfolio
+- `28` Experimentation
+- `29` Automation
+- `30` Environment & Infrastructure
+- `31` Procurement & Vendor
+- `32` Support & Service
+- `33` Business Continuity
+- `34` System Governance
+- `35` System Evolution
 
-## Control hierarchy
+**Important:** none of these is a competing OS. They are capability domains inside ANAS OS.
+
+## Authority model
 
 ```text
-ANAS OS
-    │
-    ▼
-CONSTITUTION
-    │
-    ▼
-GOVERNANCE
-    │
-    ├── BUSINESS
-    ├── PRODUCT
-    └── ENGINEERING
-            │
-            ▼
-        AGENT OS
-            │
-            ├── AGENTS
-            ├── SKILLS
-            └── HARNESSES
-                    │
-                    ▼
-                  TOOLS
-                    │
-                    ▼
-                EXECUTION
-                    │
-                    ▼
-                 EVIDENCE
-                    │
-                    ▼
-             METRICS + FEEDBACK
-                    │
-                    ▼
-                LEARNING
-                    │
-                    ▼
-              META-OS UPDATE
+                    ANAS OS
+                       │
+                CONSTITUTION
+                       │
+                   POLICIES
+                       │
+             RISK + APPROVAL RULES
+                       │
+             CANONICAL OBJECT MODEL
+                       │
+                    STATE
+                       │
+                  WORKFLOWS
+                       │
+                  SUBSYSTEMS
+                       │
+          ┌────────────┼────────────┐
+          │            │            │
+       BUSINESS       PRODUCT    ENGINEERING
+          │            │            │
+          └────────────┼────────────┘
+                       │
+                 AGENT EXECUTION
+                       │
+             AGENTS / SKILLS / HARNESS
+                       │
+                     TOOLS
+                       │
+                   EXECUTION
+                       │
+                  EVIDENCE
+                       │
+            METRICS / EVENTS / FEEDBACK
+                       │
+                    LEARNING
+                       │
+               SYSTEM EVOLUTION
+                       │
+                       └──────► ANAS OS
 ```
-
-## Maturity model
-
-### Level 1 — Foundation
-Constitution, Business, Product, Agent, Engineering, Project, Knowledge, and Gates.
-
-### Level 2 — Operational
-Operations, Growth, Finance, Customer, Data, Release, Observability, and Security Operations.
-
-### Level 3 — Intelligent
-Research, Experimentation, Automation, Portfolio, AI Engineering, and Command Center.
-
-### Level 4 — Self-improving
-System Governance, Business Continuity, Meta-OS, policy evolution, agent evolution, workflow evolution, and knowledge evolution.
-
-**Rule:** complexity must be earned by real operational need. ANAS OS must never become an elaborate documentation project detached from actual business execution.
 
 ## Repository philosophy
 
-The repository is the implementation of ANAS OS, not ANAS OS itself. The durable assets are its principles, schemas, policies, workflows, evidence standards, and learning loops.
+The repository implements the operating system. Documentation alone is insufficient: important rules are represented as machine-readable policies, schemas, registries, lifecycle logic, validators, gates, and tests.
 
-Agent OS is treated as the **execution kernel** inside ANAS OS. ANAS OS governs what should happen, why it should happen, who/what may execute it, what evidence is required, and how the result changes future decisions.
+## Current scope
 
-## Source of truth
+The current build deliberately excludes presentation-layer work such as dashboards, CRM UI, settings screens, consumer-facing frontend applications, and similar interface projects. The core focuses on the operating protocols and execution machinery underneath those future interfaces.
+
+## Core source of truth
 
 - Constitution: `/00-constitution`
-- Global schemas and object model: `/schemas`
+- Config and domain registry: `/config`
 - Policies: `/policies`
+- Canonical schemas: `/schemas`
 - Workflows: `/workflows`
+- Native agent execution: `/04-agent-system`
 - Project templates: `/07-project-templates`
-- Agent execution kernel: `/04-agent-os`
-- System evolution: `/35-meta-os`
+- System evolution: `/35-system-evolution`
+- Runtime engine: `/src`
+- Tests: `/tests`
 
-## Current build strategy
+## Development principle
 
-Build the control plane before building a large platform:
-
-1. Establish constitutional rules.
-2. Define canonical objects and schemas.
-3. Define gates and approval classes.
-4. Define project lifecycle and evidence requirements.
-5. Integrate the existing Agent OS as the execution layer.
-6. Add reusable project templates.
-7. Add operational data only when real projects require it.
-8. Automate repeatable workflows after they have been proven manually.
-
-This repository should remain useful even when the underlying AI tools, frameworks, vendors, and models change.
+Start with the smallest reliable mechanism that enforces the rule. Add automation, orchestration, storage, or advanced intelligence only when a real workflow justifies it. ANAS OS should become more capable without becoming needless bureaucracy.
