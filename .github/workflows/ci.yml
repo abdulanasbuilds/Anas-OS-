@@ -14,10 +14,10 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Validate JSON policies and schemas
+      - name: Validate canonical JSON contracts and registries
         run: |
-          node -e "for (const p of ['config/anas-os.json','policies/policy-registry.json','policies/approval-matrix.json','policies/gate-registry.json','policies/security-policy.json','policies/data-policy.json','policies/integration-policy.json','policies/automation-policy.json','schemas/project.schema.json','schemas/decision.schema.json','schemas/risk.schema.json','schemas/agent.schema.json','schemas/gate.schema.json','schemas/object-registry.json','agents/registry.json','workflows/project-lifecycle.json']) JSON.parse(require('fs').readFileSync(p,'utf8')); console.log('JSON PASS')"
-      - name: Test core engine
+          node -e "for (const p of ['config/anas-os.json','config/domain-registry.json','01-kernel/policies/policy-registry.json','01-kernel/policies/gate-registry.json','01-kernel/objects/registry.json','02-domains/agent-system/registry/agents.json','03-workflows/project-lifecycle.json']) JSON.parse(require('fs').readFileSync(p,'utf8')); console.log('JSON PASS')"
+      - name: Test canonical runtime and kernel
         run: npm test
-      - name: Validate repository shape
+      - name: Validate canonical repository shape
         run: npm run validate
