@@ -1,0 +1,7 @@
+{
+  "version":"0.1.0",
+  "requiredControls":["timeouts","retries_when_safe","idempotency_for_repeatable_operations","structured_error_handling","rate_limit_awareness","secret_reference_not_secret_value","provider_health_visibility"],
+  "webhookRules":["verify authenticity","make handlers idempotent","persist receipt before irreversible processing when appropriate","record failures for replay"],
+  "providerExitRule":"Critical providers must have documented fallback, degradation, or migration strategy before production dependency is accepted.",
+  "approvalTriggers":["new production credential scope","financial transaction behavior","customer-data export","provider with material lock-in"]
+}
