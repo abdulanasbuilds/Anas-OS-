@@ -1,0 +1,22 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/task.schema.json",
+  "type":"object",
+  "required":["id","title","projectId","status","owner","acceptanceCriteria"],
+  "properties":{
+    "id":{"type":"string"},
+    "title":{"type":"string"},
+    "projectId":{"type":"string"},
+    "status":{"enum":["backlog","ready","in_progress","blocked","review","done","cancelled"]},
+    "owner":{"type":"string"},
+    "agentId":{"type":"string"},
+    "priority":{"enum":["critical","high","medium","low"]},
+    "dependencies":{"type":"array","items":{"type":"string"}},
+    "acceptanceCriteria":{"type":"array","items":{"type":"string"}},
+    "evidenceRequired":{"type":"array","items":{"type":"string"}},
+    "outputArtifacts":{"type":"array","items":{"type":"string"}},
+    "blockedReason":{"type":"string"},
+    "createdAt":{"type":"string"},
+    "updatedAt":{"type":"string"}
+  }
+}
