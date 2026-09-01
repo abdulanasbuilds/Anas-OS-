@@ -1,0 +1,27 @@
+{
+  "version": "0.1.0",
+  "levels": {
+    "autonomous": "Agent may execute without human approval when policy permits and risk is low.",
+    "approval_required": "Agent may prepare and propose the action, but a human must approve before execution.",
+    "human_only": "Only a human may execute or authorize the action.",
+    "forbidden": "The action is never allowed within ANAS OS."
+  },
+  "actions": {
+    "read_repository": "autonomous",
+    "create_non_sensitive_document": "autonomous",
+    "run_tests": "autonomous",
+    "run_static_analysis": "autonomous",
+    "create_branch": "autonomous",
+    "merge_reviewed_code": "approval_required",
+    "production_deploy": "approval_required",
+    "production_database_migration": "approval_required",
+    "destructive_database_change": "human_only",
+    "delete_customer_data": "human_only",
+    "rotate_production_credentials": "approval_required",
+    "change_authentication_policy": "human_only",
+    "disable_security_control": "forbidden",
+    "exfiltrate_secret": "forbidden",
+    "fake_test_result": "forbidden",
+    "invent_external_evidence": "forbidden"
+  }
+}
