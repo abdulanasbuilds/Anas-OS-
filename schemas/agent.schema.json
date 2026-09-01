@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/agent.schema.json",
+  "type":"object",
+  "required":["id","name","role","responsibilities","inputs","outputs","allowedTools","forbiddenActions","escalationConditions"],
+  "properties":{
+    "id":{"type":"string"},
+    "name":{"type":"string"},
+    "role":{"type":"string"},
+    "responsibilities":{"type":"array","items":{"type":"string"}},
+    "inputs":{"type":"array","items":{"type":"string"}},
+    "outputs":{"type":"array","items":{"type":"string"}},
+    "allowedTools":{"type":"array","items":{"type":"string"}},
+    "forbiddenActions":{"type":"array","items":{"type":"string"}},
+    "escalationConditions":{"type":"array","items":{"type":"string"}},
+    "approvalLevel":{"enum":["autonomous","approval_required","human_only","forbidden"]},
+    "version":{"type":"string"},
+    "status":{"enum":["active","experimental","deprecated","retired"]}
+  }
+}
