@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "policies": [
+    {"id":"P001","name":"problem-before-code","severity":"critical","rule":"A project cannot enter build before a problem, target customer, desired outcome, and validation plan exist.","stage":"validate","action":"block"},
+    {"id":"P002","name":"no-secrets-in-source","severity":"critical","rule":"Secrets, private keys, credentials, and production tokens must not be committed to source control.","stage":"all","action":"block"},
+    {"id":"P003","name":"no-unverified-claims","severity":"high","rule":"Agents must not claim tests, deployments, integrations, or external facts that were not actually verified.","stage":"all","action":"block"},
+    {"id":"P004","name":"security-by-default","severity":"critical","rule":"Authentication, authorization, tenant isolation, validation, and auditability are required according to project risk.","stage":"define","action":"gate"},
+    {"id":"P005","name":"destructive-change-approval","severity":"critical","rule":"Destructive production database, infrastructure, data, or security changes require human approval and recovery evidence.","stage":"release","action":"human_approval"},
+    {"id":"P006","name":"evidence-before-transition","severity":"high","rule":"Lifecycle transitions require the evidence defined by the destination gate.","stage":"all","action":"gate"},
+    {"id":"P007","name":"least-privilege-agents","severity":"high","rule":"Agents receive only the tools and permissions required for their assigned task.","stage":"all","action":"gate"},
+    {"id":"P008","name":"automation-after-proof","severity":"medium","rule":"Repeated workflows should be automated only after the manual process is understood and failure modes are known.","stage":"operate","action":"advisory"},
+    {"id":"P009","name":"local-market-fit","severity":"high","rule":"For Ghana/Africa-facing products, assumptions about channels, payments, connectivity, trust, and customer behavior must be explicitly validated.","stage":"validate","action":"gate"},
+    {"id":"P010","name":"cost-aware-ai","severity":"high","rule":"AI features must have an estimated cost envelope, fallback behavior, and measurable value before production use.","stage":"define","action":"gate"}
+  ]
+}
