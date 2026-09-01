@@ -1,0 +1,6 @@
+{
+  "version":"0.1.0",
+  "principles":["observable","idempotent_when_possible","bounded","reversible_when_possible","least_privilege","human_escalation"],
+  "requirements":["Every automation has an owner.","Every scheduled automation has a defined frequency and purpose.","Every mutation automation has a failure path.","High-impact automation has explicit approval boundaries.","Automation may not silently retry destructive actions.","Every material automation action must leave an auditable record."],
+  "retryPolicy":{"defaultMaxAttempts":3,"backoff":"exponential","destructiveActions":"never_automatic_retry"}
+}
