@@ -1,0 +1,41 @@
+{
+  "name": "ANAS OS",
+  "version": "0.1.0",
+  "codename": "Foundation",
+  "description": "Decision-and-execution operating system for building and operating a one-person technology company.",
+  "mode": "standard",
+  "defaultBranch": "main",
+  "lifecycle": [
+    "discover",
+    "validate",
+    "define",
+    "build",
+    "verify",
+    "release",
+    "operate",
+    "measure",
+    "learn"
+  ],
+  "approvalLevels": [
+    "autonomous",
+    "approval_required",
+    "human_only",
+    "forbidden"
+  ],
+  "evidenceLevels": [
+    "none",
+    "record",
+    "verified",
+    "independent"
+  ],
+  "principles": [
+    "problem_before_feature",
+    "business_value_before_technical_excitement",
+    "evidence_before_assumptions",
+    "simplicity_before_complexity",
+    "security_by_default",
+    "automation_after_proof",
+    "human_approval_for_high_risk",
+    "never_hide_uncertainty"
+  ]
+}
