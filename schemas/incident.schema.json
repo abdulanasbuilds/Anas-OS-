@@ -1,0 +1,21 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/incident.schema.json",
+  "type":"object",
+  "required":["id","title","severity","status","detectedAt"],
+  "properties":{
+    "id":{"type":"string"},
+    "title":{"type":"string"},
+    "severity":{"enum":["low","medium","high","critical"]},
+    "category":{"enum":["business","product","technical","security","operational","vendor","continuity"]},
+    "status":{"enum":["detected","triaged","mitigating","resolved","closed"]},
+    "detectedAt":{"type":"string"},
+    "resolvedAt":{"type":"string"},
+    "impact":{"type":"string"},
+    "rootCause":{"type":"string"},
+    "mitigation":{"type":"string"},
+    "correctiveActions":{"type":"array","items":{"type":"string"}},
+    "preventiveActions":{"type":"array","items":{"type":"string"}},
+    "owner":{"type":"string"}
+  }
+}
