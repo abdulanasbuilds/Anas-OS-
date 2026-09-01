@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/risk.schema.json",
+  "type":"object",
+  "required":["id","title","category","probability","impact","owner","mitigation","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "title":{"type":"string"},
+    "category":{"enum":["business","product","technical","security","operational","financial","legal","vendor","continuity"]},
+    "probability":{"type":"integer","minimum":1,"maximum":5},
+    "impact":{"type":"integer","minimum":1,"maximum":5},
+    "score":{"type":"integer","minimum":1,"maximum":25},
+    "owner":{"type":"string"},
+    "mitigation":{"type":"string"},
+    "contingency":{"type":"string"},
+    "status":{"enum":["open","mitigated","accepted","transferred","closed"]},
+    "reviewAt":{"type":"string"}
+  }
+}
