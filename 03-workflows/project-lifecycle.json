@@ -1,0 +1,15 @@
+{
+  "version":"0.2.0",
+  "description":"Canonical ANAS OS lifecycle orchestration",
+  "stages":[
+    {"id":"discover","primaryAgent":"strategist"},
+    {"id":"validate","primaryAgent":"researcher"},
+    {"id":"define","primaryAgent":"product","supportingAgents":["architect","security"]},
+    {"id":"build","primaryAgent":"builder","supportingAgents":["database","ai-engineering","security"]},
+    {"id":"verify","primaryAgent":"qa","supportingAgents":["security"]},
+    {"id":"release","primaryAgent":"release"},
+    {"id":"operate","primaryAgent":"release","supportingAgents":["growth","customer"]},
+    {"id":"measure","primaryAgent":"growth"},
+    {"id":"learn","primaryAgent":"meta"}
+  ]
+}
