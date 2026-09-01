@@ -1,0 +1,23 @@
+{
+  "id":"universal-project-lifecycle",
+  "version":"0.1.0",
+  "description":"Canonical lifecycle for every ANAS OS project.",
+  "stages":[
+    {"id":"discover","objective":"Understand the opportunity and problem.","primaryAgent":"strategist","outputs":["opportunity_brief","problem_statement"],"exitGate":"G01"},
+    {"id":"validate","objective":"Prove that the problem and buyer demand are real enough to justify product definition.","primaryAgent":"researcher","outputs":["validation_report","evidence_records"],"exitGate":"G02"},
+    {"id":"define","objective":"Turn validated demand into a bounded product and safe technical plan.","primaryAgent":"product","supportAgents":["architect","security"],"outputs":["prd","architecture","risk_register"],"exitGate":"G03+G04"},
+    {"id":"build","objective":"Implement only the approved scope.","primaryAgent":"builder","supportAgents":["database","ai","security"],"outputs":["implementation","tests"],"exitGate":"G05"},
+    {"id":"verify","objective":"Prove correctness, security and acceptance criteria.","primaryAgent":"qa","supportAgents":["security"],"outputs":["verification_report","known_issues"],"exitGate":"G06"},
+    {"id":"release","objective":"Safely deliver the verified artifact.","primaryAgent":"release","outputs":["release_record","rollback_plan"],"exitGate":"G07"},
+    {"id":"operate","objective":"Run the product reliably and support users.","primaryAgent":"release","supportAgents":["growth"],"outputs":["operations_record"],"exitGate":"G08"},
+    {"id":"measure","objective":"Observe business, product, system and cost outcomes.","primaryAgent":"growth","outputs":["metrics_snapshot","customer_feedback"],"exitGate":"G09"},
+    {"id":"learn","objective":"Convert evidence and failures into decisions and system improvements.","primaryAgent":"meta","outputs":["learning_record","next_iteration"],"exitGate":"G10"}
+  ],
+  "transitionRules":[
+    "Never skip a required gate.",
+    "Never infer evidence that is not recorded.",
+    "High-risk actions require approval regardless of lifecycle stage.",
+    "A failed gate blocks the transition until remediation is recorded.",
+    "Exceptions expire and must be reviewed."
+  ]
+}
