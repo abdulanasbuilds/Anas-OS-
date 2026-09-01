@@ -1,0 +1,15 @@
+{
+  "version": "0.1.0",
+  "gates": [
+    {"id":"G01","name":"business_gate","from":"discover","to":"validate","mode":"evidence","required":["problem","target_customer","desired_outcome","market_hypothesis"]},
+    {"id":"G02","name":"validation_gate","from":"validate","to":"define","mode":"evidence","required":["customer_evidence","alternative_analysis","validation_result","willingness_to_pay_or_justification"]},
+    {"id":"G03","name":"product_gate","from":"define","to":"build","mode":"review","required":["prd","acceptance_criteria","ux_flows","scope","non_functional_requirements"]},
+    {"id":"G04","name":"architecture_gate","from":"define","to":"build","mode":"review","required":["architecture","data_model","security_model","integration_plan","risk_assessment"]},
+    {"id":"G05","name":"build_gate","from":"build","to":"verify","mode":"automated","required":["typecheck","lint","build","changed_files"]},
+    {"id":"G06","name":"verification_gate","from":"verify","to":"release","mode":"evidence","required":["tests","security_checks","acceptance_result","known_issues"]},
+    {"id":"G07","name":"release_gate","from":"release","to":"operate","mode":"approval","required":["release_plan","rollback_plan","deployment_evidence","approval"]},
+    {"id":"G08","name":"operations_gate","from":"operate","to":"measure","mode":"evidence","required":["monitoring","support_path","backup_status","incident_path"]},
+    {"id":"G09","name":"learning_gate","from":"measure","to":"learn","mode":"evidence","required":["metrics","feedback","insights","next_action"]},
+    {"id":"G10","name":"continuity_gate","from":"learn","to":"discover","mode":"review","required":["lessons","system_change_proposal_or_no_change"]}
+  ]
+}
