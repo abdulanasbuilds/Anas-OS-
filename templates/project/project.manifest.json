@@ -1,0 +1,35 @@
+{
+  "id":"replace-with-kebab-case-id",
+  "name":"Project Name",
+  "type":"saas",
+  "stage":"discover",
+  "business":{
+    "problem":"Describe the specific painful problem being solved.",
+    "targetCustomer":"Identify the buyer/user precisely.",
+    "desiredOutcome":"Describe the measurable outcome.",
+    "marketHypothesis":"State the market assumption to validate.",
+    "model":"Describe how the project could create and capture value."
+  },
+  "product":{
+    "valueProposition":"One clear value proposition.",
+    "scope":[],
+    "nonGoals":[],
+    "acceptanceCriteria":[]
+  },
+  "engineering":{
+    "stack":[],
+    "architecture":"",
+    "dataModel":"",
+    "securityModel":"",
+    "integrations":[]
+  },
+  "evidence":{
+    "items":[]
+  },
+  "risk":[],
+  "metadata":{
+    "riskLevel":"medium",
+    "containsSecrets":false,
+    "securityBypass":false
+  }
+}
