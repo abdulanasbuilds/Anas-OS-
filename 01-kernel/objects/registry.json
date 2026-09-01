@@ -1,0 +1,4 @@
+{
+  "version":"0.2.0",
+  "objects":["Person","Organization","Project","Product","Customer","Lead","Problem","Opportunity","Feature","Experiment","Agent","Skill","Tool","Workflow","Policy","Gate","Decision","Task","Incident","Deployment","Environment","Integration","Vendor","Asset","Document","Metric","Event","Risk","Cost","Learning"]
+}
