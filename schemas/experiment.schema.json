@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/experiment.schema.json",
+  "type":"object",
+  "required":["id","hypothesis","successMetric","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "type":{"enum":["interview","landing_page","prototype","mvp","ab_test","pricing","technical","other"]},
+    "hypothesis":{"type":"string"},
+    "expectedResult":{"type":"string"},
+    "successMetric":{"type":"string"},
+    "timeLimit":{"type":"string"},
+    "budgetLimit":{"type":"number","minimum":0},
+    "status":{"enum":["planned","running","completed","cancelled"]},
+    "result":{"enum":["confirmed","rejected","inconclusive","unexpected"]},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "learning":{"type":"string"},
+    "nextAction":{"type":"string"}
+  }
+}
