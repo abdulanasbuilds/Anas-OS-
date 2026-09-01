@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/metric.schema.json",
+  "type":"object",
+  "required":["id","name","category","definition","owner"],
+  "properties":{
+    "id":{"type":"string"},
+    "name":{"type":"string"},
+    "category":{"enum":["business","product","engineering","security","operations","ai","finance","growth","customer"]},
+    "definition":{"type":"string"},
+    "formula":{"type":"string"},
+    "unit":{"type":"string"},
+    "target":{"type":"number"},
+    "thresholds":{"type":"object"},
+    "source":{"type":"string"},
+    "owner":{"type":"string"},
+    "cadence":{"type":"string"}
+  }
+}
