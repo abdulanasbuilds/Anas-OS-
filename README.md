@@ -2,186 +2,164 @@
 
 **ANAS OS is a unified decision-and-execution operating system for building, launching, operating, and improving technology businesses.**
 
-It is one system, not a collection of separate operating systems. Business, product, engineering, AI, agent execution, data, research, customer, growth, security, finance, operations, and system evolution are native subsystems governed by the same constitutional core, schemas, policies, state, gates, evidence model, and learning loop.
-
-## The central rule
+It is one system with native capability domains. There is no separate Business OS, Product OS, Agent OS, or Meta-OS authority. Every domain operates under the same Foundation, Kernel, Contracts, Workflows, evidence model, and governance rules.
 
 > **One operating system. Many native subsystems. One source of truth.**
 
-An agent runtime is therefore not an independent "Agent OS". A dashboard is not a separate "Command OS". A Meta-OS is not a second authority. They are capabilities implemented inside ANAS OS.
-
-## What ANAS OS does
+## Core flow
 
 ```text
-OPPORTUNITY
+Opportunity analysis
     ↓
-PROBLEM
+Business validation
     ↓
-CUSTOMER + MARKET
+Customer research
     ↓
-VALIDATION
+Product definition
     ↓
-BUSINESS CASE
+Architecture
     ↓
-PRODUCT DEFINITION
+Risk analysis
     ↓
-ARCHITECTURE
+AGENT SYSTEM
     ↓
-AGENT-ASSISTED EXECUTION
+Verification
     ↓
-VERIFICATION
+Release
     ↓
-RELEASE
+Operations
     ↓
-OPERATIONS
+Customer feedback
     ↓
-CUSTOMER FEEDBACK
+Learning
     ↓
-MEASUREMENT
-    ↓
-LEARNING
-    ↓
-SYSTEM IMPROVEMENT
+System improvement
 ```
 
-## Universal decision loop
+## Repository architecture
 
 ```text
-CONTEXT
-  ↓
-OBJECTIVE
-  ↓
-CONSTRAINTS
-  ↓
-OPTIONS
-  ↓
-EVIDENCE
-  ↓
-DECISION
-  ↓
-APPROVAL
-  ↓
-EXECUTION
-  ↓
-VERIFICATION
-  ↓
-MEASUREMENT
-  ↓
-FEEDBACK
-  ↓
-LEARNING
-  ↓
-SYSTEM UPDATE
+ANAS OS
+├── 00-foundation
+│   ├── constitution
+│   ├── authority
+│   ├── governance
+│   ├── evidence
+│   └── identity
+├── 01-kernel
+│   ├── objects
+│   ├── state
+│   ├── policies
+│   ├── decisions
+│   ├── risk
+│   ├── approvals
+│   ├── gates
+│   ├── lifecycle
+│   ├── audit
+│   └── events
+├── 02-domains
+│   ├── business
+│   ├── product
+│   ├── agent-system
+│   ├── engineering
+│   ├── ai
+│   ├── data
+│   ├── research
+│   ├── customer
+│   ├── integration
+│   ├── operations
+│   ├── security
+│   ├── growth
+│   ├── finance
+│   ├── legal
+│   ├── communication
+│   ├── content
+│   ├── portfolio
+│   ├── experimentation
+│   ├── automation
+│   ├── infrastructure
+│   ├── vendors
+│   ├── support
+│   ├── continuity
+│   └── system-evolution
+├── 03-workflows
+├── 04-contracts
+├── 05-templates
+├── 06-knowledge
+├── 07-runtime
+├── 08-projects
+├── 09-tests
+└── 10-tooling
 ```
 
-## Native architecture
+## Native Agent System
 
-ANAS OS is organized into 36 native control domains. The numbered domains are subsystems of the same operating system:
+The Agent System is the mature Agent OS capability embedded inside ANAS OS and extended with ANAS-wide governance.
 
-- `00` Constitution
-- `01` Identity & Context
-- `02` Business
-- `03` Product
-- `04` Agent Execution
-- `05` Engineering
-- `06` AI Engineering
-- `07` Project Templates
-- `08` Project Management
-- `09` Knowledge
-- `10` Operations
-- `11` Growth
-- `12` Finance & Cost
-- `13` Legal & Compliance
-- `14` Release
-- `15` Observability
-- `16` Evaluation
-- `17` Failure & Recovery
-- `18` Command Center data contracts
-- `19` Data
-- `20` Research & Intelligence
-- `21` Customer
-- `22` Integration
-- `23` Developer Experience
-- `24` Security Operations
-- `25` Communication
-- `26` Asset & Content
-- `27` Portfolio
-- `28` Experimentation
-- `29` Automation
-- `30` Environment & Infrastructure
-- `31` Procurement & Vendor
-- `32` Support & Service
-- `33` Business Continuity
-- `34` System Governance
-- `35` System Evolution
+It includes:
 
-**Important:** none of these is a competing OS. They are capability domains inside ANAS OS.
+- Agent Registry
+- Agent Roles
+- Agent Contracts
+- Skills
+- Harnesses
+- Orchestration
+- Context Management
+- Memory
+- Tool Registry
+- Permissions
+- Handoffs
+- Parallel Execution
+- Planning
+- Task Decomposition
+- Verification
+- Failure Recovery
+- Human Escalation
+- Auditability
+- Agent Evaluation
+- Agent Cost Tracking
+- Agent Observability
 
-## Authority model
+Agent execution consumes approved context such as business goals, customer evidence, project state, financial limits, legal constraints, product requirements, security policy, vendor constraints, market evidence, portfolio priorities, and production status.
+
+## Control relationship
 
 ```text
-                    ANAS OS
-                       │
-                CONSTITUTION
-                       │
-                   POLICIES
-                       │
-             RISK + APPROVAL RULES
-                       │
-             CANONICAL OBJECT MODEL
-                       │
-                    STATE
-                       │
-                  WORKFLOWS
-                       │
-                  SUBSYSTEMS
-                       │
-          ┌────────────┼────────────┐
-          │            │            │
-       BUSINESS       PRODUCT    ENGINEERING
-          │            │            │
-          └────────────┼────────────┘
-                       │
-                 AGENT EXECUTION
-                       │
-             AGENTS / SKILLS / HARNESS
-                       │
-                     TOOLS
-                       │
-                   EXECUTION
-                       │
-                  EVIDENCE
-                       │
-            METRICS / EVENTS / FEEDBACK
-                       │
-                    LEARNING
-                       │
-               SYSTEM EVOLUTION
-                       │
-                       └──────► ANAS OS
+                         ANAS OS
+                            │
+                     ┌──────┴──────┐
+                     │             │
+                  KERNEL         DOMAINS
+                     │             │
+                     │       ┌─────┴─────┐
+                     │       │           │
+                     │     AGENT      BUSINESS
+                     │     SYSTEM      PRODUCT
+                     │       │        ENGINEERING
+                     │       │           ...
+                     └───────┼───────────
+                             │
+                         WORKFLOWS
+                             │
+                           TOOLS
+                             │
+                         EXECUTION
 ```
 
-## Repository philosophy
+## Authority
 
-The repository implements the operating system. Documentation alone is insufficient: important rules are represented as machine-readable policies, schemas, registries, lifecycle logic, validators, gates, and tests.
+Foundation defines constitutional authority. Kernel enforces shared state, policies, decisions, risk, approvals, gates, lifecycle, audit, and events. Domains provide business and technical capability. Workflows coordinate domains. Runtime executes approved work.
+
+No agent, tool, workflow, or domain may override a higher layer.
 
 ## Current scope
 
-The current build deliberately excludes presentation-layer work such as dashboards, CRM UI, settings screens, consumer-facing frontend applications, and similar interface projects. The core focuses on the operating protocols and execution machinery underneath those future interfaces.
+This repository focuses on the operating protocols and execution machinery underneath future interfaces. Dashboards, CRM UI, settings screens, and other presentation-layer applications are intentionally out of scope for the core.
 
-## Core source of truth
+## Development commands
 
-- Constitution: `/00-constitution`
-- Config and domain registry: `/config`
-- Policies: `/policies`
-- Canonical schemas: `/schemas`
-- Workflows: `/workflows`
-- Native agent execution: `/04-agent-system`
-- Project templates: `/07-project-templates`
-- System evolution: `/35-system-evolution`
-- Runtime engine: `/src`
-- Tests: `/tests`
-
-## Development principle
-
-Start with the smallest reliable mechanism that enforces the rule. Add automation, orchestration, storage, or advanced intelligence only when a real workflow justifies it. ANAS OS should become more capable without becoming needless bureaucracy.
+```bash
+npm test
+npm run validate
+npm run help
+```
