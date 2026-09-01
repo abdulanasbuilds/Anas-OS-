@@ -1,0 +1,2 @@
+# System Evolution
+Measures ANAS OS itself, identifies process and capability gaps, proposes improvements, evaluates changes, and manages controlled evolution without silently changing constitutional authority.
