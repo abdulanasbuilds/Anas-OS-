@@ -5,5 +5,9 @@
   "description":"Core decision, lifecycle, policy and gate engine for ANAS OS",
   "type":"module",
   "engines":{"node":">=20"},
-  "scripts":{"validate":"node src/cli.mjs validate-repo","help":"node src/cli.mjs help"}
+  "scripts":{
+    "validate":"node src/cli.mjs validate-repo",
+    "test":"node --test tests/*.test.mjs",
+    "help":"node src/cli.mjs help"
+  }
 }
