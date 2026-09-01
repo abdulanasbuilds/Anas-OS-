@@ -1,0 +1,18 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/gate.schema.json",
+  "type":"object",
+  "required":["id","name","status","requiredEvidence","presentEvidence","missingEvidence","evaluatedAt"],
+  "properties":{
+    "id":{"type":"string"},
+    "name":{"type":"string"},
+    "status":{"enum":["pass","fail","blocked","not_applicable"]},
+    "requiredEvidence":{"type":"array","items":{"type":"string"}},
+    "presentEvidence":{"type":"array","items":{"type":"string"}},
+    "missingEvidence":{"type":"array","items":{"type":"string"}},
+    "conditions":{"type":"array","items":{"type":"string"}},
+    "approvalRequired":{"type":"boolean"},
+    "approvedBy":{"type":"string"},
+    "evaluatedAt":{"type":"string"}
+  }
+}
