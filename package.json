@@ -1,13 +1,13 @@
 {
   "name":"anas-os-core",
-  "version":"0.1.0",
+  "version":"0.2.0",
   "private":true,
-  "description":"Core decision, lifecycle, policy and gate engine for ANAS OS",
+  "description":"ANAS OS kernel, native domains, agent system, workflows and runtime",
   "type":"module",
   "engines":{"node":">=20"},
   "scripts":{
-    "validate":"node src/cli.mjs validate-repo",
-    "test":"node --test tests/*.test.mjs",
-    "help":"node src/cli.mjs help"
+    "validate":"node 07-runtime/cli.mjs validate-repo",
+    "test":"node --test 09-tests/*.test.mjs",
+    "help":"node 07-runtime/cli.mjs help"
   }
 }
