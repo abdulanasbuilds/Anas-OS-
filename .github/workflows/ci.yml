@@ -1,0 +1,23 @@
+name: ANAS OS CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  core:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Validate JSON policies and schemas
+        run: |
+          node -e "for (const p of ['config/anas-os.json','policies/policy-registry.json','policies/approval-matrix.json','policies/gate-registry.json','policies/security-policy.json','policies/data-policy.json','policies/integration-policy.json','policies/automation-policy.json','schemas/project.schema.json','schemas/decision.schema.json','schemas/risk.schema.json','schemas/agent.schema.json','schemas/gate.schema.json','schemas/object-registry.json','agents/registry.json','workflows/project-lifecycle.json']) JSON.parse(require('fs').readFileSync(p,'utf8')); console.log('JSON PASS')"
+      - name: Test core engine
+        run: npm test
+      - name: Validate repository shape
+        run: npm run validate
