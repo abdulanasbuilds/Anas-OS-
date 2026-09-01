@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/deployment.schema.json",
+  "type":"object",
+  "required":["id","projectId","environment","version","status","startedAt"],
+  "properties":{
+    "id":{"type":"string"},
+    "projectId":{"type":"string"},
+    "environment":{"enum":["development","preview","staging","production"]},
+    "version":{"type":"string"},
+    "commitSha":{"type":"string"},
+    "status":{"enum":["planned","running","succeeded","failed","rolled_back"]},
+    "startedAt":{"type":"string"},
+    "completedAt":{"type":"string"},
+    "approvalRef":{"type":"string"},
+    "rollbackPlanRef":{"type":"string"},
+    "verificationRef":{"type":"string"}
+  }
+}
