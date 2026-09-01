@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/decision.schema.json",
+  "type":"object",
+  "required":["id","context","objective","constraints","options","evidence","decision","approval","owner","createdAt"],
+  "properties":{
+    "id":{"type":"string"},
+    "context":{"type":"string","minLength":1},
+    "objective":{"type":"string","minLength":1},
+    "constraints":{"type":"array","items":{"type":"string"}},
+    "options":{"type":"array","minItems":1,"items":{"type":"object","required":["id","description"],"properties":{"id":{"type":"string"},"description":{"type":"string"},"cost":{"type":"number"},"risk":{"type":"string"}}}},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "decision":{"type":"object","required":["selectedOption","rationale"],"properties":{"selectedOption":{"type":"string"},"rationale":{"type":"string"},"confidence":{"type":"number","minimum":0,"maximum":1},"reversible":{"type":"boolean"}}},
+    "approval":{"enum":["autonomous","approval_required","human_only","forbidden"]},
+    "owner":{"type":"string"},
+    "createdAt":{"type":"string"},
+    "reviewAt":{"type":"string"},
+    "status":{"enum":["proposed","approved","rejected","implemented","superseded"]}
+  }
+}
