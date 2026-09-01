@@ -1,0 +1,20 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/customer.schema.json",
+  "type":"object",
+  "required":["id","segment","stage","status"],
+  "properties":{
+    "id":{"type":"string"},
+    "accountId":{"type":"string"},
+    "segment":{"type":"string"},
+    "persona":{"type":"string"},
+    "stage":{"enum":["lead","prospect","customer","expansion","at_risk","churned","advocate"]},
+    "status":{"enum":["active","paused","inactive"]},
+    "healthScore":{"type":"number","minimum":0,"maximum":100},
+    "lastActivityAt":{"type":"string"},
+    "painPoints":{"type":"array","items":{"type":"string"}},
+    "desiredOutcomes":{"type":"array","items":{"type":"string"}},
+    "feedbackRefs":{"type":"array","items":{"type":"string"}},
+    "consent":{"type":"object"}
+  }
+}
