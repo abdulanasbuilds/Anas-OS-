@@ -1,0 +1,17 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os/learning.schema.json",
+  "type":"object",
+  "required":["id","observation","evidence","lesson","nextAction","recordedAt"],
+  "properties":{
+    "id":{"type":"string"},
+    "observation":{"type":"string"},
+    "evidence":{"type":"array","items":{"type":"string"}},
+    "lesson":{"type":"string"},
+    "implication":{"type":"string"},
+    "nextAction":{"type":"string"},
+    "systemChangeProposal":{"type":"string"},
+    "recordedAt":{"type":"string"},
+    "owner":{"type":"string"}
+  }
+}
