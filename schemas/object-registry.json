@@ -1,0 +1,12 @@
+{
+  "version":"0.1.0",
+  "objects":[
+    {"type":"person","identity":"person-id"},{"type":"organization","identity":"organization-id"},{"type":"project","identity":"project-id"},{"type":"product","identity":"product-id"},{"type":"customer","identity":"customer-id"},{"type":"lead","identity":"lead-id"},{"type":"problem","identity":"problem-id"},{"type":"opportunity","identity":"opportunity-id"},{"type":"feature","identity":"feature-id"},{"type":"experiment","identity":"experiment-id"},{"type":"agent","identity":"agent-id"},{"type":"skill","identity":"skill-id"},{"type":"tool","identity":"tool-id"},{"type":"workflow","identity":"workflow-id"},{"type":"policy","identity":"policy-id"},{"type":"gate","identity":"gate-id"},{"type":"decision","identity":"decision-id"},{"type":"task","identity":"task-id"},{"type":"incident","identity":"incident-id"},{"type":"deployment","identity":"deployment-id"},{"type":"environment","identity":"environment-id"},{"type":"integration","identity":"integration-id"},{"type":"vendor","identity":"vendor-id"},{"type":"asset","identity":"asset-id"},{"type":"document","identity":"document-id"},{"type":"metric","identity":"metric-id"},{"type":"event","identity":"event-id"},{"type":"risk","identity":"risk-id"},{"type":"cost","identity":"cost-id"},{"type":"learning","identity":"learning-id"}
+  ],
+  "relationshipRules":[
+    "Objects must have stable identifiers.",
+    "Relationships must reference existing object identifiers.",
+    "Material state changes are represented as events or decisions.",
+    "Deleted objects should be tombstoned or retained as historical records when auditability requires it."
+  ]
+}
