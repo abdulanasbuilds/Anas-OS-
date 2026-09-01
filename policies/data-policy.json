@@ -1,0 +1,16 @@
+{
+  "version":"0.1.0",
+  "classification":["public","internal","confidential","restricted"],
+  "rules":[
+    "Every critical data domain has an owner.",
+    "Collect the minimum data needed for the stated purpose.",
+    "Sensitive data access follows least privilege.",
+    "Retention and deletion rules are explicit.",
+    "Production data is never used as a casual development fixture.",
+    "Exports of sensitive data require authorization and an audit record.",
+    "Analytics events must not leak secrets or unnecessary personal data.",
+    "Data quality failures that can materially affect decisions must be visible."
+  ],
+  "qualityDimensions":["accuracy","completeness","consistency","freshness","uniqueness","validity"],
+  "lifecycle":["collect","validate","store","use","archive","delete"]
+}
