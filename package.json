@@ -1,0 +1,9 @@
+{
+  "name":"anas-os-core",
+  "version":"0.1.0",
+  "private":true,
+  "description":"Core decision, lifecycle, policy and gate engine for ANAS OS",
+  "type":"module",
+  "engines":{"node":">=20"},
+  "scripts":{"validate":"node src/cli.mjs validate-repo","help":"node src/cli.mjs help"}
+}
