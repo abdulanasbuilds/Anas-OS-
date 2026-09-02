@@ -1,0 +1,135 @@
+schema_version: "1.0.0"
+name: "ANAS OS"
+architectural_rule: "One operating system. Many native subsystems. One source of truth."
+physical_layers:
+  foundation:
+    path: 00-foundation
+    responsibilities: [constitution, authority, governance, evidence, identity]
+  kernel:
+    path: 01-kernel
+    responsibilities: [object-model, state, policy-engine, decision-engine, risk-engine, approval-engine, gate-engine, lifecycle-engine, audit-event-system]
+  domains:
+    path: 02-domains
+    rule: "Domains are native capabilities, never competing OS authorities."
+  workflows:
+    path: 03-workflows
+    responsibilities: [coordination, sequencing, branching, approvals, verification]
+  contracts:
+    path: 04-contracts
+    responsibilities: [objects, agents, tools, workflows, events, integrations, evidence, approvals]
+  templates:
+    path: 05-templates
+  knowledge:
+    path: 06-knowledge
+  runtime:
+    path: 07-runtime
+    responsibilities: [engine, agents, orchestration, tools, adapters, storage, cli]
+  projects:
+    path: 08-projects
+  tests:
+    path: 09-tests
+  tooling:
+    path: 10-tooling
+  documentation:
+    path: 11-docs
+native_domains:
+  - id: business
+    path: 02-domains/business
+    capabilities: [market, customer, validation, economics, pricing, revenue, go-to-market]
+  - id: product
+    path: 02-domains/product
+    capabilities: [discovery, requirements, UX, scope, roadmap, experimentation, acceptance]
+  - id: agent-system
+    path: 02-domains/agent-system
+    capabilities: [registry, contracts, roles, skills, harnesses, context, memory, permissions, planning, orchestration, handoffs, parallel-execution, verification, failure-recovery, evaluation, observability, human-escalation]
+  - id: engineering
+    path: 02-domains/engineering
+    capabilities: [architecture, frontend, backend, database, apis, infrastructure, testing, code-quality, deployment]
+  - id: ai
+    path: 02-domains/ai
+    capabilities: [models, prompts, routing, rag, tools, memory, evaluation, safety, ai-economics]
+  - id: data
+    path: 02-domains/data
+    capabilities: [strategy, modeling, quality, governance, pipelines, analytics, intelligence]
+  - id: research
+    path: 02-domains/research
+    capabilities: [market, technology, competitors, business, regulations, Ghana, Africa, methodology, intelligence]
+  - id: customer
+    path: 02-domains/customer
+    capabilities: [profiles, journey, feedback, health, voice-of-customer, retention]
+  - id: integration
+    path: 02-domains/integration
+    capabilities: [providers, apis, oauth, webhooks, reliability, contracts, fallbacks]
+  - id: operations
+    path: 02-domains/operations
+    capabilities: [monitoring, reliability, incidents, runbooks, support, production-readiness]
+  - id: security
+    path: 02-domains/security
+    capabilities: [access, vulnerabilities, threat-models, monitoring, incident-response, audits]
+  - id: growth
+    path: 02-domains/growth
+    capabilities: [acquisition, sales, onboarding, retention, messaging, growth-experiments]
+  - id: finance
+    path: 02-domains/finance
+    capabilities: [revenue, cogs, ai-costs, infrastructure-costs, budgets, margins]
+  - id: legal
+    path: 02-domains/legal
+    capabilities: [contracts, privacy, licensing, ip, compliance]
+  - id: communication
+    path: 02-domains/communication
+    capabilities: [internal, customer, sales, alerts, localization]
+  - id: content
+    path: 02-domains/content
+    capabilities: [brand, sales, marketing, product-content, documentation]
+  - id: portfolio
+    path: 02-domains/portfolio
+    capabilities: [opportunities, products, allocation, product-health, decisions]
+  - id: experimentation
+    path: 02-domains/experimentation
+    capabilities: [hypotheses, design, execution, results, learning]
+  - id: automation
+    path: 02-domains/automation
+    capabilities: [triggers, workflows, schedules, permissions, retries, audit]
+  - id: infrastructure
+    path: 02-domains/infrastructure
+    capabilities: [environments, compute, storage, networking, configuration, scaling]
+  - id: vendors
+    path: 02-domains/vendors
+    capabilities: [registry, evaluation, lifecycle, costs, risk, exit-strategy]
+  - id: support
+    path: 02-domains/support
+    capabilities: [intake, classification, triage, assignment, resolution, knowledge, intelligence]
+  - id: continuity
+    path: 02-domains/continuity
+    capabilities: [backups, recovery, rto-rpo, disaster-recovery, dependency-failures]
+  - id: system-evolution
+    path: 02-domains/system-evolution
+    capabilities: [system-health, policy-evolution, agent-evolution, workflow-evolution, knowledge-evolution, improvement-proposals, versioning, self-improvement]
+control_domains_merged_without_extra_os_layers:
+  identity-context: 00-foundation/identity
+  project: 08-projects
+  project-templates: 05-templates
+  knowledge: 06-knowledge
+  release: 03-workflows/release
+  observability: [01-kernel/audit, 02-domains/agent-system/observability, domain observability]
+  evaluation: [02-domains/agent-system/evaluation, domain-specific evaluation]
+  failure-recovery: [01-kernel, 02-domains/agent-system/failure-recovery, domain runbooks]
+  command-center: 04-contracts/cross-domain-state plus runtime aggregation; presentation UI is out of core scope
+  developer-experience: 10-tooling plus engineering workflows
+  security-operations: [02-domains/security, 03-workflows/incident-response]
+  asset-content: 02-domains/content
+  procurement-vendor: 02-domains/vendors
+  support-service: 02-domains/support
+  business-continuity: 02-domains/continuity
+  system-governance: 00-foundation/governance
+lifecycle:
+  - discover
+  - validate
+  - define
+  - build
+  - verify
+  - release
+  - operate
+  - measure
+  - learn
+  - discover

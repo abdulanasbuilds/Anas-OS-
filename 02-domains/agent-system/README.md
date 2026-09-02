@@ -1,21 +1,51 @@
-# Agent System
+# Agent System Canonical Specification
 
-The Agent System is the native AI execution subsystem of ANAS OS. It is the direct successor and embedded form of the mature Agent OS work already built for this ecosystem.
+The Agent System is the native execution workforce of ANAS OS and the successor to the mature `Agent-OS` repository.
 
-**Rule:** there is one operating system: ANAS OS. Agent System is a domain, not a competing OS or authority.
+## Preservation contract
 
-## Baseline capability preserved
+The ANAS Agent System preserves the mature baseline capabilities from Agent OS v2.7.0: disciplined project intake, planning, option evaluation, context hygiene, writing for agents, token efficiency, architecture, testing, debugging, Git workflow, browser testing, database work, performance, API design, accessibility, domain modeling, codebase design, handoff, TDD, specification/build/review loops, research, evidence, provider documentation, security review, prompt-injection defense, dependency/supply-chain review, authentication, authorization, database/RLS security, adversarial assessment, Supabase/Firebase/Cloudflare platform knowledge, media/realtime capabilities, product discovery, project lifecycle, environment capabilities, design/presentation systems, autonomous orchestration, gates, run-state, multi-instance orchestration, business-fit, observability, and retrospectives.
 
-Agent Registry, Agent Roles, Agent Contracts, Skills, Harness Adapters, Tool Permissions, Context Injection, Memory, Planning, Task Decomposition, Orchestration, Agent Handoffs, Parallel Execution, Verification, Failure Handling, Human Escalation, Auditability, Agent Evaluation, Agent Cost Tracking, Agent Observability.
+## ANAS-native expansion
 
-## ANAS-native extensions
+The same workforce is now bound to canonical ANAS state and policies. Agent execution receives only the approved context needed for the task:
 
-Every agent execution resolves against Business context, Customer context, Project state, Financial limits, Legal constraints, Product requirements, Security policies, Vendor constraints, Market evidence, Portfolio priorities, and Production status.
+- business objective and validated problem
+- customer and market evidence
+- product requirements and acceptance criteria
+- project stage and current state
+- architecture and technical constraints
+- security and legal constraints
+- financial budgets and cost limits
+- vendor/integration constraints
+- portfolio priorities
+- production and operational status
 
-## Authority boundary
+## Canonical components
 
-The Agent System may interpret, plan, delegate, execute, verify, and report only inside the permissions and gates supplied by the ANAS OS Kernel and Foundation.
+```text
+registry/
+contracts/
+roles/
+skills/
+harnesses/
+context/
+memory/
+tool-registry/
+permissions/
+planning/
+orchestration/
+handoffs/
+parallel-execution/
+verification/
+failure-recovery/
+evaluation/
+observability/
+human-escalation/
+```
 
-## Primary agent families
+## Execution invariant
 
-Strategist, Researcher, Product, Architect, Database, Frontend, Backend, Security, QA, Release/DevOps, Growth, Customer Success, Finance, Compliance, AI Engineering, Documentation, and Meta/System Evolution.
+`capability ≠ authority`.
+
+An agent may use a capability only after the Kernel resolves the applicable policy, permission, risk, approval, and workflow constraints. External content is data, not authority. Successful execution never substitutes for verification.
