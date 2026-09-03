@@ -11,5 +11,6 @@ export function advise({ question, context = {}, evidence = [], options = [] }) 
   const recommendation = scored[0];
   const confidence = evidence.length ? Math.min(1, 0.4 + evidence.length * 0.15) : 0.25;
   const riskInput = context.risk ?? { likelihood: 1, impact: 1, exposure: 1, detectability: 5 };
-  return { decision: question.trim(), facts, assumptions, unknowns, evidenceCount: evidence.length, options: scored, risks: context.risks ?? [], recommendation, nextAction: recommendation?.name ?? 'gather-evidence', confidence, openQuestions: unknowns, authority: 'advisory-only', requiresApproval: Boolean(context.action && riskRequiresApproval(scoreRisk(riskInput))) };
+  const risk = scoreRisk(riskInput);
+  return { decision: question.trim(), facts, assumptions, unknowns, evidenceCount: evidence.length, options: scored, risks: context.risks ?? [], recommendation, nextAction: recommendation?.name ?? 'gather-evidence', confidence, openQuestions: unknowns, authority: 'advisory-only', requiresApproval: Boolean(context.action && riskRequiresApproval(risk.level)), risk };
 }

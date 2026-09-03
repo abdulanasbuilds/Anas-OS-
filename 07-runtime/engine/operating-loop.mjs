@@ -3,27 +3,16 @@ import { scoreRisk, riskRequiresApproval } from './risk.mjs';
 import { listSkills } from './skills.mjs';
 
 const DEFAULT_AGENTS = {
-  research: 'researcher',
-  product: 'product',
-  build: 'builder',
-  code: 'builder',
-  security: 'security',
-  test: 'qa',
-  release: 'release',
-  growth: 'growth',
-  workflow: 'strategist',
-  automate: 'builder'
+  research: 'researcher', product: 'product', build: 'builder', code: 'builder',
+  security: 'security', test: 'qa', release: 'release', growth: 'growth',
+  workflow: 'strategist', automate: 'builder'
 };
 
 const SKILL_TERMS = [
-  ['advisor', 'personal-advisor'],
-  ['workflow', 'workflow-capture'],
-  ['briefing', 'research-briefing'],
-  ['research', 'research-briefing'],
-  ['content', 'content-repurposing'],
-  ['chief of staff', 'chief-of-staff'],
-  ['improve', 'system-improvement'],
-  ['harness', 'agent-harness-execution'],
+  ['advisor', 'personal-advisor'], ['workflow', 'workflow-capture'],
+  ['briefing', 'research-briefing'], ['research', 'research-briefing'],
+  ['content', 'content-repurposing'], ['chief of staff', 'chief-of-staff'],
+  ['improve', 'system-improvement'], ['harness', 'agent-harness-execution'],
   ['provider', 'provider-neutral-execution']
 ];
 
@@ -45,7 +34,7 @@ export async function planGoal({ goal, context = {}, risk = { likelihood: 1, imp
   const skills = await listSkills();
   const agentId = chooseAgent(goal);
   const riskResult = scoreRisk(risk);
-  const approvalRequired = riskRequiresApproval(riskResult);
+  const approvalRequired = riskRequiresApproval(riskResult.level);
   const tasks = [
     { id: 'frame', agentId: 'strategist', objective: 'Frame the goal, constraints, assumptions, and success criteria', dependsOn: [], toolId: 'git.inspect', consequential: false },
     { id: 'execute', agentId, objective: goal.trim(), dependsOn: ['frame'], toolId: 'git.inspect', consequential: approvalRequired },
@@ -53,14 +42,12 @@ export async function planGoal({ goal, context = {}, risk = { likelihood: 1, imp
   ];
   const plan = createExecutionPlan(tasks);
   return {
-    goal: goal.trim(),
-    context,
+    goal: goal.trim(), context,
     selectedSkillHints: chooseSkillHints(goal, skills),
     risk: riskResult,
     approvalRequired,
     humanGate: approvalRequired ? 'required before consequential execution' : 'not automatically required',
-    plan,
-    batches: executionBatches(plan),
+    plan, batches: executionBatches(plan),
     loop: ['goal','context','skill','plan','authority','execute','verify','evidence','approve-when-required','outcome','learning','governed-improvement'],
     operatingPrinciples: ['provider-neutral','local-first where practical','human taste at consequential boundaries','no silent self-modification']
   };

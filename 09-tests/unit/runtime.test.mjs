@@ -4,6 +4,7 @@ import { loadRuntime, executeGoal } from '../../07-runtime/engine/runtime.mjs';
 import { planGoal } from '../../07-runtime/engine/operating-loop.mjs';
 import { systemCheck } from '../../07-runtime/engine/system-check.mjs';
 import { listProviders, resolveProvider, invokeAI } from '../../07-runtime/engine/providers.mjs';
+import { advise } from '../../07-runtime/engine/advisor.mjs';
 
 test('runtime loads canonical agents, tools, provider boundary, and adapter policy', async () => {
   const runtime = await loadRuntime();
@@ -22,12 +23,20 @@ test('safe goal execution is not blocked merely because strategist has approval-
   assert.equal(result.results[2].status, 'completed');
 });
 
-test('high-risk goals still gate consequential execution', async () => {
+test('high-risk goals gate consequential execution and block dependent work', async () => {
   const plan = await planGoal({ goal: 'deploy to production', risk: { likelihood: 5, impact: 5, exposure: 5, detectability: 1 } });
+  assert.equal(plan.approvalRequired, true);
+  assert.equal(plan.risk.level, 'critical');
   const result = await executeGoal({ plan });
   assert.equal(result.results[0].status, 'completed');
   assert.equal(result.results[1].status, 'approval-required');
   assert.equal(result.results[2].status, 'blocked');
+});
+
+test('advisor uses risk level correctly', async () => {
+  const result = advise({ question: 'Should I deploy?', context: { action: true, risk: { likelihood: 5, impact: 5, exposure: 5, detectability: 1 } } });
+  assert.equal(result.risk.level, 'critical');
+  assert.equal(result.requiresApproval, true);
 });
 
 test('provider routing is opt-in and paid providers are excluded by default', async () => {
