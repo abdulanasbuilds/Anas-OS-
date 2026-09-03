@@ -1,0 +1,17 @@
+{
+  "version": 1,
+  "policy": {
+    "externalProvidersDefault": "not-configured",
+    "credentialsNeverStoredInRepository": true,
+    "externalMutationsRequireApproval": true
+  },
+  "adapters": {
+    "web.research": {"enabled": false, "provider": "external"},
+    "git.push": {"enabled": false, "provider": "git"},
+    "production.deploy": {"enabled": false, "provider": "deployment"},
+    "analytics": {"enabled": false, "provider": "external"},
+    "content.publish": {"enabled": false, "provider": "external"},
+    "calendar": {"enabled": false, "provider": "external"},
+    "messaging": {"enabled": false, "provider": "external"}
+  }
+}
