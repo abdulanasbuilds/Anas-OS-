@@ -14,10 +14,27 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Validate canonical JSON contracts and registries
+      - name: Validate JSON registries and schemas
         run: |
-          node -e "for (const p of ['config/anas-os.json','config/domain-registry.json','01-kernel/policies/policy-registry.json','01-kernel/policies/gate-registry.json','01-kernel/objects/registry.json','02-domains/agent-system/registry/agents.json','03-workflows/project-lifecycle.json']) JSON.parse(require('fs').readFileSync(p,'utf8')); console.log('JSON PASS')"
-      - name: Test canonical runtime and kernel
+          node - <<'NODE'
+          const fs=require('fs');
+          const paths=[
+            'package.json','config/anas-os.json','config/domain-registry.json',
+            'config/canonical-architecture.json','config/canonical-domain-registry.json',
+            '01-kernel/policies/policy-registry.json','01-kernel/policies/gate-registry.json',
+            '01-kernel/objects/registry.json','02-domains/agent-system/registry/agents.json',
+            '02-domains/agent-system/registry/specialists.json','02-domains/agent-system/registry/skills.json',
+            '02-domains/agent-system/registry/harnesses.json','02-domains/agent-system/registry/tools.json',
+            '03-workflows/project-lifecycle.json','03-workflows/workflow-registry.json',
+            '04-contracts/agents/execution-request.schema.json','04-contracts/approvals/approval.schema.json',
+            '05-templates/projects/standard/project.manifest.json'
+          ];
+          for (const p of paths) JSON.parse(fs.readFileSync(p,'utf8'));
+          console.log(`JSON PASS (${paths.length} files)`);
+          NODE
+      - name: Run test suite
         run: npm test
       - name: Validate canonical repository shape
         run: npm run validate
+      - name: Runtime doctor
+        run: npm run doctor

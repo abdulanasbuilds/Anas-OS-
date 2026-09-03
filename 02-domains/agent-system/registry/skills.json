@@ -1,0 +1,19 @@
+{
+  "version":"1.0.0",
+  "skills":[
+    {"id":"research","ownerDomain":"research","risk":"low"},
+    {"id":"business-validation","ownerDomain":"business","risk":"medium"},
+    {"id":"requirements","ownerDomain":"product","risk":"low"},
+    {"id":"architecture","ownerDomain":"engineering","risk":"medium"},
+    {"id":"database-engineering","ownerDomain":"engineering","risk":"high"},
+    {"id":"backend-engineering","ownerDomain":"engineering","risk":"high"},
+    {"id":"frontend-engineering","ownerDomain":"engineering","risk":"medium","scope":"presentation-layer"},
+    {"id":"security-review","ownerDomain":"security","risk":"high"},
+    {"id":"testing","ownerDomain":"evaluation","risk":"low"},
+    {"id":"release-engineering","ownerDomain":"operations","risk":"high"},
+    {"id":"customer-research","ownerDomain":"customer","risk":"medium"},
+    {"id":"unit-economics","ownerDomain":"finance","risk":"medium"},
+    {"id":"compliance-review","ownerDomain":"legal","risk":"high"},
+    {"id":"system-improvement","ownerDomain":"system-evolution","risk":"high"}
+  ]
+}

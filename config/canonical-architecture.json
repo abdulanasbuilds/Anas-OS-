@@ -1,0 +1,13 @@
+{
+  "version":"1.0.0",
+  "name":"ANAS OS Canonical Architecture",
+  "singleAuthority":"ANAS OS",
+  "layers":["foundation","kernel","domains","workflows","contracts","templates","knowledge","runtime","projects","tests","tooling"],
+  "foundation":["constitution","authority","governance","evidence","identity"],
+  "kernel":["object-model","state","policy-engine","decision-engine","risk-engine","approval-engine","gate-engine","lifecycle-engine","audit-event-system"],
+  "agentSystemCapabilities":["agent-registry","agent-contracts","roles","skills","harnesses","orchestration","context-management","memory","tool-registry","permissions","handoffs","parallel-execution","planning","task-decomposition","verification","failure-recovery","human-escalation","evaluation","observability","cost-tracking"],
+  "domains":["business","product","agent-system","engineering","ai","data","research","customer","integration","operations","security","growth","finance","legal","communication","content","portfolio","experimentation","automation","infrastructure","vendors","support","continuity","system-evolution"],
+  "workflows":["new-business","product-development","research","agent-execution","coding","testing","release","sales","customer-support","incident-response","system-improvement","universal-decision","feature-development","bug-resolution","customer-feedback","security-review","vendor-evaluation","experiment","onboarding"],
+  "contracts":["objects","agents","tools","workflows","events","integrations","evidence","approvals"],
+  "excludedPresentationLayers":["UI","frontend applications","dashboards","presentation components"]
+}

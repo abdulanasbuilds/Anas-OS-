@@ -1,0 +1,14 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os://contracts/agent/v1",
+  "type":"object",
+  "required":["id","name","version","authority","capabilities"],
+  "properties":{
+    "id":{"type":"string"},"name":{"type":"string"},"version":{"type":"string"},
+    "authority":{"enum":["autonomous","approval-required","human-only","forbidden"]},
+    "capabilities":{"type":"array","items":{"type":"string"}},
+    "skills":{"type":"array","items":{"type":"string"}},
+    "tools":{"type":"array","items":{"type":"string"}},
+    "harness":{"type":"string"},"escalationConditions":{"type":"array","items":{"type":"string"}}
+  },"additionalProperties":false
+}

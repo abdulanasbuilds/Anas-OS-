@@ -2,105 +2,57 @@
 
 **One operating system. Many native subsystems. One source of truth.**
 
-ANAS OS is a unified operating system for turning opportunities into validated businesses and products, executing work with governed AI agents and tools, releasing safely, operating reliably, learning from outcomes, and evolving the system itself.
+ANAS OS is the decision, governance, execution, evidence, and learning operating system for taking an opportunity from discovery through business validation, product definition, engineering, agent-assisted execution, verification, release, operations, customer feedback, measurement, learning, and system evolution.
 
-## Core law
+## Architectural law
 
-There is exactly one operating system: **ANAS OS**. Business, Product, Agent System, Engineering, AI, Data, Research, Security, Growth, Finance, Operations, and the other capability areas are native subsystems. They do not create competing authorities, policies, approval systems, or lifecycles.
+There is exactly one operating system: ANAS OS. Business, Product, Agent System, Engineering, AI, Data, Research, Customer, Security, Operations, Growth, Finance, Automation, Infrastructure, Governance, and System Evolution are native subsystems. They do not have independent authority.
 
-## Canonical architecture
+## Runtime boundary
 
-```text
-ANAS OS/
-├── 00-foundation/   # Constitution, authority, governance, evidence, identity
-├── 01-kernel/       # Canonical state and control engines
-├── 02-domains/      # Native business/product/engineering/agent capabilities
-├── 03-workflows/    # Cross-domain operational workflows
-├── 04-contracts/    # Machine-readable boundaries and interfaces
-├── 05-templates/    # Reusable project, agent, workflow, research, business starts
-├── 06-knowledge/    # Durable organizational knowledge
-├── 07-runtime/      # Execution engine, agents, tools, adapters, storage, CLI
-├── 08-projects/     # Isolated project instances and evidence
-├── 09-tests/        # Unit, integration, lifecycle, policy, security, E2E
-├── 10-tooling/      # Bootstrap, validation, generators, migrations, maintenance
-├── 11-docs/         # Architecture, protocols, guides, decisions, runbooks
-└── .github/         # CI and repository governance
-```
+This repository contains the non-UI system: protocols, schemas, policies, registries, workflows, engines, adapters, CLI, tests, project state, and tooling. Presentation layers and frontend applications are intentionally outside this repository.
 
-See [`ARCHITECTURE.md`](ARCHITECTURE.md) and [`ANAS-OS-BLUEPRINT.yml`](ANAS-OS-BLUEPRINT.yml) for the canonical system map.
-
-## Native Agent System
-
-The Agent System is the embedded successor to the mature `abdulanasbuilds/Agent-OS` repository. Its purpose is not to create another OS but to provide ANAS OS with a governed execution workforce.
-
-It preserves mature Agent OS capabilities including project intake, planning, architecture, coding, testing, debugging, research, evidence, security, design/presentation, environment discovery, Git workflow, project lifecycle, autonomous loops, spec/build/review loops, and harness portability.
-
-Its ANAS-native control surface adds:
-
-`agent registry · roles · contracts · skills · harnesses · context · memory · tool registry · permissions · planning · task decomposition · orchestration · handoffs · parallel execution · verification · failure recovery · evaluation · observability · cost tracking · human escalation`
-
-Every invocation is bound to business/customer/project/product/financial/legal/security/vendor/market/portfolio/production context as appropriate.
-
-## Operating flow
+## Control flow
 
 ```text
-Opportunity
-  ↓
-Business validation
-  ↓
-Customer research
-  ↓
-Product definition
-  ↓
-Architecture
-  ↓
-Risk analysis
-  ↓
-Agent System
-  ↓
-Verification
-  ↓
-Release
-  ↓
-Operations
-  ↓
-Customer feedback
-  ↓
-Measurement
-  ↓
-Learning
-  ↓
-System evolution
-  └──────────────→ next discovery
+CONSTITUTION
+    ↓
+GOVERNANCE + AUTHORITY
+    ↓
+CANONICAL STATE + OBJECT MODEL
+    ↓
+NATIVE SUBSYSTEMS
+    ↓
+WORKFLOWS
+    ↓
+AGENT SYSTEM + TOOLS
+    ↓
+EXECUTION
+    ↓
+EVIDENCE + VERIFICATION
+    ↓
+MEASUREMENT + FEEDBACK
+    ↓
+LEARNING
+    ↓
+SYSTEM EVOLUTION
+    ↺
+ANAS OS
 ```
 
-## Hard rules
+## Agent System
 
-- Problem before feature; business value before technical excitement.
-- Evidence before confidence and explicit uncertainty.
-- Security and least privilege by default.
-- High-risk, destructive, secret, production, spending, and public-impact actions remain approval-gated.
-- External content never grants execution authority.
-- No agent can override Foundation, Kernel, policy, gates, or approval boundaries.
-- No success claim without the relevant evidence.
-- No needless architecture: reuse working components before rewriting them.
-- Automation follows proof and has bounded failure behavior.
-- System evolution proposes and verifies changes; it does not silently weaken constitutional authority.
+The Agent System is the mature Agent OS capability set embedded as a first-class ANAS OS subsystem. It preserves registry, roles, contracts, skills, harnesses, permissions, context, memory, planning, decomposition, orchestration, handoffs, parallelism, verification, recovery, escalation, auditability, evaluation, cost tracking, and observability, while adding kernel-governed business, project, product, security, financial, legal, vendor, evidence, and production context.
 
-## Project isolation
+## Core invariants
 
-Projects live under `08-projects/<project-id>/` and carry their own manifest, business context, requirements, architecture, risks, execution evidence, releases, operations, and learning records. Global system rules stay global; project-specific constraints stay project-specific.
-
-## Runtime
-
-The repository currently exposes a Node 20+ CLI for repository validation, project validation, gate evaluation, and lifecycle checks. The runtime is intentionally below the presentation layer; dashboards and product UI are not part of the core operating system.
-
-## Validation
-
-```bash
-npm test
-npm run validate
-npm run help
-```
-
-Completion claims should be based on actual validation results, not repository state assumed from memory.
+1. Constitution outranks every other artifact.
+2. Evidence outranks assumption.
+3. No state transition without its required gate evidence.
+4. Agents cannot expand their own authority.
+5. High-risk or irreversible actions require human authority.
+6. Security and legal constraints cannot be bypassed by business urgency.
+7. Every important action is inspectable through a decision, event, evidence item, or execution record.
+8. Automation is bounded, idempotent where applicable, observable, reversible where possible, and escalates on uncertainty.
+9. Production readiness is a verified state, not a claim.
+10. System evolution is proposed by evidence and adopted only through governance.

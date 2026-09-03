@@ -1,0 +1,10 @@
+export { ExecutionEngine } from './execution-engine.mjs';
+export { authorizeAction } from './authority.mjs';
+export { assembleAgentContext } from './context.mjs';
+export { createAuditEvent, appendAuditEvent } from './audit.mjs';
+export { createEvidence, evaluateEvidenceRequirements } from './evidence.mjs';
+export { requestApproval, resolveApproval, isApprovalValid } from './approval.mjs';
+export { createWorkflow, runWorkflow } from './workflow.mjs';
+export { validateExecutionPlan, createExecutionPlan, readyTasks, executionBatches } from './orchestration.mjs';
+export { STAGES, canTransition, assertTransition, transitionState } from './lifecycle.mjs';
+export { scoreRisk, riskRequiresApproval } from './risk.mjs';

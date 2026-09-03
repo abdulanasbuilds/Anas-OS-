@@ -1,0 +1,12 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os://contracts/event/v1",
+  "type":"object",
+  "required":["id","timestamp","type","actor"],
+  "properties":{
+    "id":{"type":"string"},"timestamp":{"type":"string","format":"date-time"},"type":{"type":"string"},
+    "severity":{"enum":["debug","info","warning","error","critical"]},
+    "actor":{"type":"object","required":["type","id"],"properties":{"type":{"type":"string"},"id":{"type":"string"}},"additionalProperties":false},
+    "object":{"type":"object"},"data":{"type":"object"}
+  },"additionalProperties":false
+}

@@ -1,0 +1,11 @@
+{
+  "version":"1.0.0",
+  "harnesses":[
+    {"id":"claude-code","type":"coding-agent","supports":["shell","files","git"]},
+    {"id":"opencode","type":"coding-agent","supports":["shell","files","git"]},
+    {"id":"cursor","type":"coding-agent","supports":["files","git"]},
+    {"id":"antigravity","type":"agent-harness","supports":["planning","tools","files"]},
+    {"id":"generic-api","type":"model-api","supports":["messages","structured-output"]},
+    {"id":"human","type":"human-harness","supports":["approval","review","ownership"]}
+  ]
+}

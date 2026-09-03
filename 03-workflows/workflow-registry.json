@@ -1,0 +1,18 @@
+{
+  "version":"1.0.0",
+  "workflows":[
+    {"id":"new-business","name":"New Business","entry":"discover","exit":"validate","steps":["opportunity-analysis","customer-research","business-case","validation-gate"]},
+    {"id":"product-development","name":"Product Development","entry":"define","exit":"build","steps":["requirements","scope","architecture","risk-review","build-gate"]},
+    {"id":"research","name":"Research","entry":"research-request","exit":"evidence-pack","steps":["scope","source-plan","collect","cross-check","synthesize","evidence-record"]},
+    {"id":"agent-execution","name":"Agent Execution","entry":"task","exit":"verified-result","steps":["plan","authorize","execute","verify","record","handoff-or-escalate"]},
+    {"id":"coding","name":"Coding","entry":"approved-change","exit":"verified-change","steps":["understand","plan","implement","typecheck","test","security-check","record"]},
+    {"id":"testing","name":"Testing","entry":"candidate","exit":"verification-report","steps":["unit","integration","security","regression","acceptance","report"]},
+    {"id":"release","name":"Release","entry":"verified","exit":"operate","steps":["release-readiness","approval","deploy","smoke-test","rollback-check","record"]},
+    {"id":"sales","name":"Sales","entry":"qualified-lead","exit":"outcome-recorded","steps":["research","message","outreach","follow-up","proposal","outcome"]},
+    {"id":"customer-support","name":"Customer Support","entry":"intake","exit":"closed","steps":["classify","triage","assign","resolve","verify","close","learn"]},
+    {"id":"incident-response","name":"Incident Response","entry":"detected","exit":"recovered","steps":["contain","investigate","mitigate","recover","verify","postmortem"]},
+    {"id":"system-improvement","name":"System Improvement","entry":"signal","exit":"adopted-or-rejected","steps":["measure","diagnose","propose","impact-review","test","approve","adopt-or-reject"]},
+    {"id":"security-review","name":"Security Review","entry":"scope","exit":"decision","steps":["threat-model","scan","abuse-test","review","remediate-or-accept"]},
+    {"id":"vendor-evaluation","name":"Vendor Evaluation","entry":"candidate","exit":"decision","steps":["capability","economics","security","reliability","lock-in","exit-plan","decision"]}
+  ]
+}

@@ -1,25 +1,20 @@
 #!/usr/bin/env node
 import fs from 'node:fs/promises';
-import { validateProject, validateRepositoryShape, loadJson } from './validate.mjs';
-import { loadGates, evaluateAllGates } from '../01-kernel/gates/gates.mjs';
-import { STAGES, canTransition } from '../01-kernel/lifecycle/lifecycle.mjs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
+import { validateProject, validateRepositoryShape, loadJson, walkFiles } from './validate.mjs';
+import { STAGES, canTransition } from './engine/lifecycle.mjs';
+import { evaluateAllGates, loadGates } from './engine/gates.mjs';
 
+const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const [, , command, ...args] = process.argv;
 
-function usage() { console.log(`ANAS OS Runtime CLI\n\nCommands:\n  help                              Show this help\n  validate-repo                     Validate canonical repository structure\n  validate-project <manifest.json>  Validate a project manifest\n  gates <manifest.json>             Evaluate gates relevant to current stage\n  transition <from> <to>            Check whether a lifecycle transition is legal\n  stages                            Print lifecycle stages\n`); }
+function usage() { console.log(`ANAS OS Runtime\n\nCommands:\n  help\n  validate-repo\n  validate-project <manifest.json>\n  gates <manifest.json>\n  transition <from> <to>\n  stages\n  inventory\n  doctor\n`); }
+async function validateRepo() { const paths = await walkFiles(ROOT); const result = validateRepositoryShape(paths); console.log(JSON.stringify(result, null, 2)); if (!result.valid) process.exitCode=1; }
+async function validateProjectFile(file) { const result=validateProject(await loadJson(path.resolve(process.cwd(), file))); console.log(JSON.stringify(result,null,2)); if(!result.valid) process.exitCode=1; }
+async function gates(file) { const project=await loadJson(path.resolve(process.cwd(), file)); const results=evaluateAllGates(project, await loadGates(ROOT)); console.log(JSON.stringify(results,null,2)); if(results.some(r=>r.status==='blocked'||r.status==='fail')) process.exitCode=1; }
+async function inventory() { const files=await walkFiles(ROOT); const groups={}; for(const file of files){const top=file.split('/')[0]; groups[top]=(groups[top]??0)+1;} console.log(JSON.stringify({totalFiles:files.length,groups},null,2)); }
+async function doctor() { const checks=[]; checks.push(['package', await exists('package.json')]); checks.push(['constitution', await exists('00-foundation/constitution/CONSTITUTION.md')]); checks.push(['agent registry', await exists('02-domains/agent-system/registry/agents.json')]); checks.push(['runtime index', await exists('07-runtime/index.mjs')]); checks.push(['tests', await exists('09-tests/unit/kernel.test.mjs')]); const result={checks:checks.map(([name,pass])=>({name,pass})),healthy:checks.every(([,pass])=>pass)}; console.log(JSON.stringify(result,null,2)); if(!result.healthy) process.exitCode=1; }
+async function exists(file){try{await fs.access(path.join(ROOT,file));return true;}catch{return false;}}
 
-async function validateRepo() {
-  const paths = await fetchTreePaths(); const result = validateRepositoryShape(paths);
-  if (!result.valid) { console.error(`Repository validation failed. Missing: ${result.missing.join(', ')}`); process.exitCode = 1; return; }
-  console.log('ANAS OS canonical repository validation: PASS');
-}
-async function fetchTreePaths() {
-  const paths=[];
-  async function walk(dir,prefix='') { for (const entry of await fs.readdir(dir,{withFileTypes:true})) { const relative=`${prefix}${entry.name}`; if (entry.name === '.git' || entry.name === 'node_modules') continue; if (entry.isDirectory()) await walk(`${dir}/${entry.name}`,`${relative}/`); else paths.push(relative); } }
-  await walk(process.cwd()); return paths;
-}
-async function validateProjectFile(path) { const result=validateProject(await loadJson(path)); console.log(JSON.stringify(result,null,2)); if (!result.valid) process.exitCode=1; }
-async function gates(path) { const project=await loadJson(path); const results=evaluateAllGates(project,await loadGates()); console.log(JSON.stringify(results,null,2)); if(results.some((r)=>r.status==='blocked'||r.status==='fail')) process.exitCode=1; }
-function transition(from,to) { if(!STAGES.includes(from)||!STAGES.includes(to)){console.error(`Unknown stage. Valid stages: ${STAGES.join(', ')}`);process.exitCode=1;return;} const ok=canTransition(from,to); console.log(ok?`PASS: ${from} -> ${to}`:`BLOCK: ${from} -> ${to}`); if(!ok)process.exitCode=1; }
-
-switch(command){case 'help':case undefined:usage();break;case 'validate-repo':await validateRepo();break;case 'validate-project':if(!args[0])throw new Error('A project manifest path is required.');await validateProjectFile(args[0]);break;case 'gates':if(!args[0])throw new Error('A project manifest path is required.');await gates(args[0]);break;case 'transition':transition(args[0],args[1]);break;case 'stages':console.log(STAGES.join('\n'));break;default:console.error(`Unknown command: ${command}`);usage();process.exitCode=1;}
+switch(command){case 'help':case undefined:usage();break;case 'validate-repo':await validateRepo();break;case 'validate-project':if(!args[0])throw new Error('A project manifest path is required');await validateProjectFile(args[0]);break;case 'gates':if(!args[0])throw new Error('A project manifest path is required');await gates(args[0]);break;case 'transition':if(!STAGES.includes(args[0])||!STAGES.includes(args[1])) throw new Error(`Valid stages: ${STAGES.join(', ')}`); console.log(canTransition(args[0],args[1])?'PASS':'BLOCK'); if(!canTransition(args[0],args[1]))process.exitCode=1; break;case 'stages':console.log(STAGES.join('\n'));break;case 'inventory':await inventory();break;case 'doctor':await doctor();break;default:usage();process.exitCode=1;}

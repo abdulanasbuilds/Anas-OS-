@@ -1,0 +1,16 @@
+{
+  "version":"1.0.0",
+  "tools":[
+    {"id":"filesystem.read","authority":"autonomous","mutates":false,"description":"Read repository or project files"},
+    {"id":"filesystem.write","authority":"autonomous","mutates":true,"scope":"approved-task"},
+    {"id":"git.inspect","authority":"autonomous","mutates":false},
+    {"id":"git.commit","authority":"approval-required","mutates":true},
+    {"id":"git.push","authority":"approval-required","mutates":true},
+    {"id":"dependency.add","authority":"approval-required","mutates":true},
+    {"id":"production.deploy","authority":"approval-required","mutates":true},
+    {"id":"production.data.delete","authority":"human-only","mutates":true},
+    {"id":"credential.export","authority":"forbidden","mutates":false},
+    {"id":"test.run","authority":"autonomous","mutates":false},
+    {"id":"web.research","authority":"autonomous","mutates":false}
+  ]
+}

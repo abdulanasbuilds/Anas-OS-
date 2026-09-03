@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os://schemas/approval/v1",
+  "type":"object",
+  "required":["id","action","requestedBy","requiredAuthority","status","reason"],
+  "properties":{
+    "id":{"type":"string"},
+    "action":{"type":"string"},
+    "requestedBy":{"type":"string"},
+    "requiredAuthority":{"enum":["autonomous","approval-required","human-only","forbidden"]},
+    "status":{"enum":["pending","approved","rejected","expired","cancelled"]},
+    "reason":{"type":"string"},
+    "reviewer":{"type":"string"},
+    "decisionAt":{"type":"string","format":"date-time"},
+    "expiresAt":{"type":"string","format":"date-time"},
+    "conditions":{"type":"array","items":{"type":"string"}}
+  },
+  "additionalProperties":false
+}

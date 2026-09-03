@@ -1,0 +1,10 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os://contracts/tool/v1",
+  "type":"object",
+  "required":["id","authority","mutates"],
+  "properties":{
+    "id":{"type":"string"},"authority":{"enum":["autonomous","approval-required","human-only","forbidden"]},
+    "mutates":{"type":"boolean"},"scope":{"type":"string"},"description":{"type":"string"}
+  },"additionalProperties":false
+}

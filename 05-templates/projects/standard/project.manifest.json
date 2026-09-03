@@ -1,0 +1,19 @@
+{
+  "id":"project-template-standard",
+  "version":"1.0.0",
+  "name":"New Project",
+  "type":"custom",
+  "stage":"discover",
+  "status":"active",
+  "owner":"human:operator",
+  "business":{"problem":"","targetCustomer":"","desiredOutcome":"","industry":"","geography":[],"workaround":"","urgency":"","frequency":"","economicMechanism":"","acquisitionChannel":""},
+  "product":{"vision":"","requirements":[],"acceptanceCriteria":[]},
+  "engineering":{"architecture":"","stack":[],"dependencies":[],"environments":[]},
+  "evidence":{"items":[]},
+  "security":{"releaseBlock":false},
+  "risks":[],
+  "decisions":[],
+  "metadata":{"containsSecrets":false,"securityBypass":false},
+  "createdAt":"",
+  "updatedAt":""
+}

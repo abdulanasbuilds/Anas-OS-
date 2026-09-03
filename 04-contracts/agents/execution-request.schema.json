@@ -1,0 +1,19 @@
+{
+  "$schema":"https://json-schema.org/draft/2020-12/schema",
+  "$id":"anas-os://schemas/execution-request/v1",
+  "type":"object",
+  "required":["id","taskId","agentId","objective","authority","context","inputs"],
+  "properties":{
+    "id":{"type":"string","minLength":3},
+    "taskId":{"type":"string"},
+    "agentId":{"type":"string"},
+    "objective":{"type":"string","minLength":1},
+    "authority":{"enum":["autonomous","approval-required","human-only","forbidden"]},
+    "context":{"type":"object"},
+    "inputs":{"type":"object"},
+    "constraints":{"type":"array","items":{"type":"string"}},
+    "requiredEvidence":{"type":"array","items":{"type":"string"}},
+    "budget":{"type":"object","properties":{"maxCost":{"type":"number","minimum":0},"currency":{"type":"string"},"maxToolCalls":{"type":"integer","minimum":0},"maxDurationSeconds":{"type":"integer","minimum":0}},"additionalProperties":false}
+  },
+  "additionalProperties":false
+}

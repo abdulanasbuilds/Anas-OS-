@@ -1,0 +1,20 @@
+{
+  "version":"1.0.0",
+  "agents":[
+    {"id":"research","name":"Research Agent","domain":"research","authority":"autonomous","capabilities":["research","source-evaluation","evidence-synthesis"]},
+    {"id":"strategy","name":"Strategist","domain":"business","authority":"autonomous","capabilities":["opportunity-analysis","validation-planning","portfolio-analysis"]},
+    {"id":"product","name":"Product Agent","domain":"product","authority":"autonomous","capabilities":["requirements","scope","acceptance","roadmap"]},
+    {"id":"architect","name":"Architect Agent","domain":"engineering","authority":"autonomous","capabilities":["architecture","tradeoffs","threat-model-input"]},
+    {"id":"database","name":"Database Agent","domain":"engineering","authority":"autonomous","capabilities":["data-modeling","migrations","query-design"]},
+    {"id":"frontend","name":"Frontend Agent","domain":"engineering","authority":"autonomous","capabilities":["frontend-implementation"],"uiScope":"outside-core-repository"},
+    {"id":"backend","name":"Backend Agent","domain":"engineering","authority":"autonomous","capabilities":["services","APIs","business-logic"]},
+    {"id":"security","name":"Security Agent","domain":"security","authority":"approval-required","capabilities":["threat-modeling","security-testing","policy-review"]},
+    {"id":"qa","name":"QA Agent","domain":"evaluation","authority":"autonomous","capabilities":["test-design","verification","regression"]},
+    {"id":"devops","name":"DevOps Agent","domain":"release","authority":"approval-required","capabilities":["CI/CD","deployment","production-readiness"]},
+    {"id":"growth","name":"Growth Agent","domain":"growth","authority":"autonomous","capabilities":["acquisition","sales-analysis","retention"]},
+    {"id":"finance","name":"Finance Agent","domain":"finance","authority":"approval-required","capabilities":["unit-economics","COGS","budgeting"]},
+    {"id":"compliance","name":"Compliance Agent","domain":"legal","authority":"approval-required","capabilities":["privacy","licensing","compliance-review"]},
+    {"id":"customer-success","name":"Customer Success Agent","domain":"customer","authority":"autonomous","capabilities":["feedback","journey","health"]},
+    {"id":"meta","name":"System Evolution Agent","domain":"system-evolution","authority":"approval-required","capabilities":["system-health","improvement-proposals","policy-evolution"]}
+  ]
+}
