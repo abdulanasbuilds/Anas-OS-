@@ -4,7 +4,7 @@ export function analyzeChiefOfStaff(text) {
   if (!text?.trim()) throw new Error('Notes are required');
   const source = lines(text);
   const matches = pattern => source.filter(line => pattern.test(line));
-  const commitments = matches(/\b(I'll|we'll|will|promise|commit|deliver|send|build|finish|follow up)\b/i).map(text => ({ text, confidence: /I'll|we'll|will/i.test(text) ? 0.8 : 0.6 }));
+  const commitments = matches(/\b(I'll|we'll|will|promise|commit|deliver|send|build|finish)\b/i).map(text => ({ text, confidence: /I'll|we'll|will/i.test(text) ? 0.8 : 0.6 }));
   const blockers = matches(/\b(blocked|blocker|waiting|stuck|cannot|can't|dependency|pending)\b/i);
   const risks = matches(/\b(risk|concern|issue|problem|uncertain|unknown)\b/i);
   const followUps = matches(/\b(follow[- ]?up|next step|action item|check back|revisit)\b/i);
