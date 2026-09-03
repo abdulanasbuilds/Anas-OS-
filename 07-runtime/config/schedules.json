@@ -1,0 +1,14 @@
+{
+  "version": 1,
+  "policy": {
+    "timezone": "Africa/Accra",
+    "defaultEnabled": false,
+    "externalActionsRequireApproval": true,
+    "maxConcurrentJobs": 1
+  },
+  "schedules": [
+    {"id":"daily-briefing","description":"Prepare daily intelligence briefing plan","enabled":false,"hour":6,"minute":0,"daysOfWeek":[0,1,2,3,4,5,6],"handler":"briefing.plan"},
+    {"id":"weekly-review","description":"Prepare weekly business review","enabled":false,"hour":8,"minute":0,"daysOfWeek":[1],"handler":"review.prepare"},
+    {"id":"chief-of-staff","description":"Review operator commitments and blockers","enabled":false,"hour":18,"minute":0,"daysOfWeek":[1,2,3,4,5],"handler":"chief-of-staff.scan"}
+  ]
+}
