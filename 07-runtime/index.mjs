@@ -14,3 +14,4 @@ export { advise } from './engine/advisor.mjs';
 export { captureWorkflow, writeWorkflowCapture } from './engine/workflow-capture.mjs';
 export { analyzeChiefOfStaff } from './engine/chief-of-staff.mjs';
 export { listSchedules, dueSchedules, runSchedule } from './engine/scheduler.mjs';
+export { planGoal } from './engine/operating-loop.mjs';
