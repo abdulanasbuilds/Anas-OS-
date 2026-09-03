@@ -1,7 +1,16 @@
-# ANAS OS / Claude Code Working Agreement
+# ANAS OS for Claude Code
 
-Read `AGENTS.md` first. Treat it as the harness bridge into ANAS OS governance.
+`CLAUDE.md` is a harness bridge, not a second constitution. Use the repository Constitution and governance as the source of truth.
 
-Inspect the constitution, relevant contracts, policies, and tests before changing code or runtime behavior. Prefer existing modules and registered skills over duplicated logic.
+When operating here:
 
-Never claim completion without execution-backed evidence. Do not weaken approval, security, legal, financial, or destructive-action controls to make a workflow pass.
+- load `AGENTS.md` and the relevant ANAS policies first;
+- plan before editing;
+- use the Agent System's skills/contracts rather than ad-hoc hidden rules;
+- preserve provider neutrality;
+- keep external network access and credentials explicit;
+- ask for human approval at ANAS-defined consequential boundaries;
+- verify changes and record evidence before completion;
+- propose, rather than silently adopt, system self-improvements.
+
+The same repository must remain usable with other coding agents, harnesses, local models, or human execution.

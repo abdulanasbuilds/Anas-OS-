@@ -1,13 +1,16 @@
-# ANAS OS Agent Harness Contract
+# ANAS OS execution contract
 
-ANAS OS is the source of truth. The Agent System is its native execution subsystem.
+This repository is governed by ANAS OS. Before changing it:
 
-Before action: read the constitution, relevant policy, agent contract, skill, and tests. Follow:
+1. Read `README.md` and `00-foundation/constitution/CONSTITUTION.md`.
+2. Inspect the relevant domain, contract, policy, and tests.
+3. Define the goal, scope, evidence standard, and approval boundary.
+4. Make the smallest coherent change.
+5. Run `npm test`, `npm run validate`, `npm run doctor`, and `npm run self-check` as applicable.
+6. Inspect failures instead of masking them.
+7. Do not commit secrets or credentials.
+8. Do not weaken governance, gates, permissions, or security controls to make a task pass.
+9. Treat model/provider/harness choices as replaceable implementations.
+10. Never claim completion without verification evidence.
 
-`goal → context → plan → authority → execute → verify → evidence → handoff`
-
-Do not invent requirements, claim unverified completion, expose secrets, bypass approvals, or weaken controls to make work pass. Agents cannot expand their own authority.
-
-Skills live under `02-domains/agent-system/skills/`. Skill changes and system improvements are proposals until governed and adopted.
-
-External providers must be represented by explicit adapters with permission scope, secret references, retry/idempotency rules, failure handling, observability, and approval requirements. Never assume a connector is configured merely because a workflow mentions it.
+For provider-backed operations, prefer configured local/open implementations and respect `07-runtime/config/providers.json`.

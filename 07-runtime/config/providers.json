@@ -1,0 +1,43 @@
+{
+  "version": 1,
+  "policy": {
+    "providerNeutral": true,
+    "coreRequiresExternalProvider": false,
+    "paidProvidersOptional": true,
+    "credentialsNeverStoredInRepository": true,
+    "networkCallsDefaultToConfiguredProvidersOnly": true,
+    "fallbackOnProviderFailure": true,
+    "humanApprovalForExternalMutations": true
+  },
+  "routing": {
+    "strategy": "capability-privacy-cost-quality-availability",
+    "allowPaidByDefault": false,
+    "preferLocal": true,
+    "requireExplicitEnablement": true
+  },
+  "providers": [
+    {
+      "id": "ollama-local",
+      "capabilities": ["ai.chat"],
+      "adapter": "ollama-chat",
+      "enabled": false,
+      "paid": false,
+      "local": true,
+      "baseUrl": "http://127.0.0.1:11434",
+      "modelEnv": "ANAS_OLLAMA_MODEL",
+      "defaultModel": "llama3.2:3b"
+    },
+    {
+      "id": "openai-compatible",
+      "capabilities": ["ai.chat", "audio.transcribe"],
+      "adapter": "openai-compatible",
+      "enabled": false,
+      "paid": true,
+      "local": false,
+      "baseUrlEnv": "ANAS_AI_BASE_URL",
+      "apiKeyEnv": "ANAS_AI_API_KEY",
+      "modelEnv": "ANAS_AI_MODEL",
+      "defaultModel": "default"
+    }
+  ]
+}

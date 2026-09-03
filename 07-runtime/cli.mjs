@@ -13,16 +13,17 @@ import { analyzeChiefOfStaff } from './engine/chief-of-staff.mjs';
 import { listSchedules, runSchedule } from './engine/scheduler.mjs';
 import { planGoal } from './engine/operating-loop.mjs';
 import { executeGoal, loadRuntime } from './engine/runtime.mjs';
+import { listProviders, resolveProvider, invokeAI } from './engine/providers.mjs';
 import { systemCheck } from './engine/system-check.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const [, , command, ...args] = process.argv;
-function usage() { console.log(`ANAS OS Runtime\n\nCore:\n  help\n  validate-repo\n  validate-project <manifest.json>\n  gates <manifest.json>\n  transition <from> <to>\n  stages\n  inventory\n  doctor\n  self-check\n\nAgent System:\n  skill list\n  skill inspect <id>\n\nOperating Layer:\n  goal <goal text>\n  run-goal <goal text>\n  advisor <question>\n  memory list\n  memory propose <text>\n  memory approve <id>\n  workflow capture <text-file>\n  chief-of-staff <notes-file>\n  scheduler list\n  scheduler run <id>\n`); }
+function usage() { console.log(`ANAS OS Runtime\n\nCore:\n  help\n  validate-repo\n  validate-project <manifest.json>\n  gates <manifest.json>\n  transition <from> <to>\n  stages\n  inventory\n  doctor\n  self-check\n\nAgent System:\n  skill list\n  skill inspect <id>\n\nOperating Layer:\n  goal <goal text>\n  run-goal <goal text>\n  advisor <question>\n  memory list\n  memory propose <text>\n  memory approve <id>\n  workflow capture <text-file>\n  chief-of-staff <notes-file>\n  scheduler list\n  scheduler run <id>\n\nProviders:\n  provider list\n  provider route <capability>\n  ai respond <prompt>\n`); }
 async function validateRepo() { const result = validateRepositoryShape(await walkFiles(ROOT)); console.log(JSON.stringify(result, null, 2)); if (!result.valid) process.exitCode=1; }
 async function validateProjectFile(file) { const result=validateProject(await loadJson(path.resolve(process.cwd(), file))); console.log(JSON.stringify(result,null,2)); if(!result.valid) process.exitCode=1; }
 async function gates(file) { const project=await loadJson(path.resolve(process.cwd(), file)); const results=evaluateAllGates(project, await loadGates(ROOT)); console.log(JSON.stringify(results,null,2)); if(results.some(r=>r.status==='blocked'||r.status==='fail')) process.exitCode=1; }
 async function inventory() { const files=await walkFiles(ROOT); const groups={}; for(const file of files){const top=file.split('/')[0]; groups[top]=(groups[top]??0)+1;} console.log(JSON.stringify({totalFiles:files.length,groups},null,2)); }
-async function doctor() { const required=[['package','package.json'],['constitution','00-foundation/constitution/CONSTITUTION.md'],['agent registry','02-domains/agent-system/registry/agents.json'],['skills','02-domains/agent-system/skills/README.md'],['memory policy','02-domains/agent-system/memory/memory-policy.md'],['runtime index','07-runtime/index.mjs'],['runtime engine','07-runtime/engine/runtime.mjs'],['tests','09-tests/unit/kernel.test.mjs']]; const checks=[]; for(const [name,file] of required) checks.push([name,await exists(file)]); const result={checks:checks.map(([name,pass])=>({name,pass})),healthy:checks.every(([,pass])=>pass)}; console.log(JSON.stringify(result,null,2)); if(!result.healthy) process.exitCode=1; }
+async function doctor() { const required=[['package','package.json'],['constitution','00-foundation/constitution/CONSTITUTION.md'],['agent registry','02-domains/agent-system/registry/agents.json'],['skills','02-domains/agent-system/skills/README.md'],['memory policy','02-domains/agent-system/memory/memory-policy.md'],['provider config','07-runtime/config/providers.json'],['runtime index','07-runtime/index.mjs'],['runtime engine','07-runtime/engine/runtime.mjs'],['tests','09-tests/unit/kernel.test.mjs']]; const checks=[]; for(const [name,file] of required) checks.push([name,await exists(file)]); const result={checks:checks.map(([name,pass])=>({name,pass})),healthy:checks.every(([,pass])=>pass)}; console.log(JSON.stringify(result,null,2)); if(!result.healthy) process.exitCode=1; }
 async function exists(file){try{await fs.access(path.join(ROOT,file));return true;}catch{return false;}}
 try {
   if (command === 'help' || command === undefined) usage();
@@ -37,7 +38,7 @@ try {
   else if (command === 'skill' && args[0] === 'list') console.log(JSON.stringify(await listSkills(),null,2));
   else if (command === 'skill' && args[0] === 'inspect') console.log((await inspectSkill(args[1])).content);
   else if (command === 'goal') console.log(JSON.stringify(await planGoal({goal:args.join(' ')}),null,2));
-  else if (command === 'run-goal') { const plan=await planGoal({goal:args.join(' ')}); console.log(JSON.stringify(await executeGoal({plan}),null,2)); }
+  else if (command === 'run-goal') { const runtime=await loadRuntime(); const plan=await planGoal({goal:args.join(' ')}); console.log(JSON.stringify(await executeGoal({plan,runtime}),null,2)); }
   else if (command === 'advisor') console.log(JSON.stringify(advise({question:args.join(' ')}),null,2));
   else if (command === 'memory' && args[0] === 'list') console.log(JSON.stringify(await readLearnings(),null,2));
   else if (command === 'memory' && args[0] === 'propose') console.log(JSON.stringify(await proposeLearning({text:args.slice(1).join(' ')}),null,2));
@@ -46,5 +47,8 @@ try {
   else if (command === 'chief-of-staff') { const text=await fs.readFile(path.resolve(process.cwd(),args[0]),'utf8'); console.log(JSON.stringify(analyzeChiefOfStaff(text),null,2)); }
   else if (command === 'scheduler' && args[0] === 'list') console.log(JSON.stringify(await listSchedules(),null,2));
   else if (command === 'scheduler' && args[0] === 'run') console.log(JSON.stringify(await runSchedule(args[1]),null,2));
+  else if (command === 'provider' && args[0] === 'list') console.log(JSON.stringify(await listProviders(),null,2));
+  else if (command === 'provider' && args[0] === 'route') console.log(JSON.stringify(await resolveProvider(args[1], { allowPaid: process.env.ANAS_ALLOW_PAID_PROVIDERS === 'true' }),null,2));
+  else if (command === 'ai' && args[0] === 'respond') console.log(JSON.stringify(await invokeAI({messages:[{role:'user',content:args.slice(1).join(' ')}],allowPaid:process.env.ANAS_ALLOW_PAID_PROVIDERS === 'true'}),null,2));
   else { usage(); process.exitCode=1; }
 } catch (error) { console.error(JSON.stringify({error:error.message},null,2)); process.exitCode=1; }
