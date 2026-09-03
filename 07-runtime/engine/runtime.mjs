@@ -58,8 +58,8 @@ export async function loadRuntime() {
   return { engine, agents: toMap(agentRegistry.agents ?? []), tools: toMap(toolRegistry.tools ?? []), adapters, providers };
 }
 
-function approvalNeeded({ authority, tool, riskApproval }) {
-  if (riskApproval) return true;
+function approvalNeeded({ authority, tool, riskApproval, consequential }) {
+  if (consequential || riskApproval) return true;
   if (authority === 'human-only') return true;
   return Boolean(tool?.mutates && tool.authority !== 'autonomous');
 }
@@ -89,7 +89,7 @@ export async function executeGoal({ plan, runtime, context = {} } = {}) {
       const toolId = chooseTool(task);
       const tool = activeRuntime.tools.get(toolId);
       if (!tool) { results.push({ taskId: task.id, status: 'blocked', reason: `tool-not-registered:${toolId}` }); continue; }
-      const needsApproval = approvalNeeded({ authority, tool, riskApproval: Boolean(plan.approvalRequired) && Boolean(task.consequential) });
+      const needsApproval = approvalNeeded({ authority, tool, riskApproval: Boolean(plan.approvalRequired), consequential: Boolean(task.consequential) });
       if (needsApproval) { results.push({ taskId: task.id, status: 'approval-required', tool: toolId, reason: 'Consequential execution requires explicit approval before the action.' }); continue; }
       const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: 'autonomous', requiredAuthority: tool.authority ?? 'autonomous', action: `goal:${task.id}` });
       if (!authorization.allowed) { results.push({ taskId: task.id, status: 'blocked', authorization }); continue; }
