@@ -1,0 +1,12 @@
+{
+  "version": 1,
+  "workflows": [
+    {"id":"workflow-discovery","skill":"workflow-capture","stage":"discover","authority":"proposal","output":"workflow-capture"},
+    {"id":"strategic-advisor","skill":"personal-advisor","stage":"decide","authority":"advisory","output":"decision-record"},
+    {"id":"daily-intelligence","skill":"research-briefing","stage":"measure","authority":"research-only","output":"briefing-plan"},
+    {"id":"weekly-review","skill":"research-briefing","stage":"learn","authority":"advisory","output":"review-plan"},
+    {"id":"chief-of-staff","skill":"chief-of-staff","stage":"operate","authority":"advisory","output":"action-ledger"},
+    {"id":"content-repurposing","skill":"content-repurposing","stage":"build","authority":"drafting-only","output":"content-drafts"},
+    {"id":"system-improvement","skill":"skill-editor","stage":"learn","authority":"proposal-only","output":"change-proposal"}
+  ]
+}
