@@ -5,6 +5,7 @@ import { ROOT } from '../fs.mjs';
 import { ExecutionEngine } from './execution-engine.mjs';
 import { appendAuditEvent, createAuditEvent } from './audit.mjs';
 import { authorizeAction } from './authority.mjs';
+import { invokeAI, transcribeAudio, listProviders } from './providers.mjs';
 
 const AGENTS = path.join(ROOT, '02-domains/agent-system/registry/agents.json');
 const TOOLS = path.join(ROOT, '02-domains/agent-system/registry/tools.json');
@@ -36,6 +37,7 @@ function shellCommand(command, args = []) {
 
 export async function loadRuntime() {
   const [agentRegistry, toolRegistry, adapters] = await Promise.all([read(AGENTS), read(TOOLS), read(ADAPTERS)]);
+  const providers = await listProviders();
   const engine = new ExecutionEngine({ agents: new Map(), tools: new Map(), audit: event => appendAuditEvent(createAuditEvent({
     type: event.type, actorType: 'runtime', actorId: 'anas-runtime', objectType: 'execution', objectId: event.requestId, data: event
   })) });
@@ -49,9 +51,26 @@ export async function loadRuntime() {
     }));
     else if (def.id === 'test.run') engine.registerTool(wrapTool(def, async () => shellCommand('npm', ['test'])));
     else if (def.id === 'git.inspect') engine.registerTool(wrapTool(def, async () => shellCommand('git', ['status', '--short', '--branch'])));
+    else if (def.id === 'ai.respond') engine.registerTool(wrapTool(def, async ({ prompt, system = 'You are ANAS OS. Follow the ANAS Constitution, expose uncertainty, and never claim work that was not verified.' }) => invokeAI({ messages: [{ role: 'system', content: system }, { role: 'user', content: prompt }] })));
+    else if (def.id === 'audio.transcribe') engine.registerTool(wrapTool(def, async ({ path: filePath }) => transcribeAudio({ filePath })));
     else engine.registerTool(wrapTool(def, async () => ({ status: 'not-configured', tool: def.id, configured: Boolean(adapters.adapters?.[def.id]?.enabled) })));
   }
-  return { engine, agents: toMap(agentRegistry.agents ?? []), tools: toMap(toolRegistry.tools ?? []), adapters };
+  return { engine, agents: toMap(agentRegistry.agents ?? []), tools: toMap(toolRegistry.tools ?? []), adapters, providers };
+}
+
+function approvalNeeded({ authority, tool, riskApproval }) {
+  if (riskApproval) return true;
+  if (authority === 'human-only') return true;
+  return Boolean(tool?.mutates && tool.authority !== 'autonomous');
+}
+
+function chooseTool(task) {
+  const objective = `${task.objective ?? ''}`.toLowerCase();
+  if (task.toolId) return task.toolId;
+  if (task.id === 'verify' || objective.includes('test') || objective.includes('verify')) return 'test.run';
+  if (task.mutates || /write|create|edit|modify|delete|deploy|publish|commit|push/.test(objective)) return 'filesystem.write';
+  if (task.agentId === 'researcher') return 'web.research';
+  return 'git.inspect';
 }
 
 export async function executeGoal({ plan, runtime, context = {} } = {}) {
@@ -67,17 +86,19 @@ export async function executeGoal({ plan, runtime, context = {} } = {}) {
       if (!agent) throw new Error(`Unknown planned agent: ${task.agentId}`);
       const authority = agent.approvalLevel === 'human_only' ? 'human-only' : agent.approvalLevel === 'approval_required' ? 'approval-required' : 'autonomous';
       const request = activeRuntime.engine.buildRequest({ taskId: task.id, agentId: task.agentId, objective: task.objective, authority, context });
-      const requiresApproval = authority !== 'autonomous' || plan.approvalRequired;
-      if (requiresApproval) { results.push({ taskId: task.id, status: 'approval-required', reason: 'Consequential execution must be explicitly approved before a mutating or external action.' }); continue; }
-      const toolId = task.agentId === 'qa' ? 'test.run' : 'git.inspect';
-      const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: authority, requiredAuthority: activeRuntime.tools.get(toolId)?.authority ?? 'autonomous', action: `goal:${task.id}` });
+      const toolId = chooseTool(task);
+      const tool = activeRuntime.tools.get(toolId);
+      if (!tool) { results.push({ taskId: task.id, status: 'blocked', reason: `tool-not-registered:${toolId}` }); continue; }
+      const needsApproval = approvalNeeded({ authority, tool, riskApproval: Boolean(plan.approvalRequired) && Boolean(task.consequential) });
+      if (needsApproval) { results.push({ taskId: task.id, status: 'approval-required', tool: toolId, reason: 'Consequential execution requires explicit approval before the action.' }); continue; }
+      const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: 'autonomous', requiredAuthority: tool.authority ?? 'autonomous', action: `goal:${task.id}` });
       if (!authorization.allowed) { results.push({ taskId: task.id, status: 'blocked', authorization }); continue; }
-      const result = await activeRuntime.engine.invoke(request, toolId);
+      const result = await activeRuntime.engine.invoke(request, toolId, task.args ?? {});
       results.push({ taskId: task.id, status: 'completed', tool: toolId, result });
       completed.add(task.id);
     }
   }
   const hasBlocked = results.some(r => r.status === 'blocked');
   const awaitingApproval = results.some(r => r.status === 'approval-required');
-  return { goal: plan.goal, completed: [...completed], results, status: hasBlocked ? 'blocked' : awaitingApproval ? 'awaiting-approval' : 'completed' };
+  return { goal: plan.goal, completed: [...completed], results, status: hasBlocked ? 'blocked' : awaitingApproval ? 'awaiting-approval' : 'completed', providerStates: activeRuntime.providers };
 }

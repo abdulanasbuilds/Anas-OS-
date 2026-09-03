@@ -1,7 +1,7 @@
 # ANAS OS Constitution
 
-**Status:** Foundational
-**Version:** 1.0.0
+**Status:** Foundational  
+**Version:** 1.1.0  
 **Authority:** Highest-level ANAS OS policy
 
 ## 1. Mission
@@ -22,6 +22,8 @@ ANAS OS exists to help turn worthwhile opportunities into reliable, economically
 10. Every important action should leave inspectable evidence.
 11. Production systems must be operable, not merely deployable.
 12. Learn from failures and update the system deliberately.
+13. Provider independence: the core OS must not depend exclusively on a commercial provider.
+14. Graceful degradation: provider, tool, or integration failure must not become fabricated success.
 
 ## 3. Non-negotiable rules
 
@@ -35,6 +37,8 @@ ANAS OS exists to help turn worthwhile opportunities into reliable, economically
 - No security-sensitive action outside its authorization boundary.
 - No claim of completion without evidence appropriate to the claim.
 - No unnecessary architecture added merely because it is technically interesting.
+- No core workflow may silently hard-code a single commercial AI, hosting, storage, database, communications, or automation vendor when an abstraction is practical.
+- No paid external provider is implicitly required; paid execution must be explicitly configured/allowed.
 
 ## 4. Business rule
 
@@ -83,7 +87,13 @@ When principles conflict, prefer:
 
 **Safety/security → legality/compliance → business viability → correctness → reliability → maintainability → speed → convenience.**
 
-## 8. Change to the Constitution
+## 8. Provider and adapter boundary
+
+ANAS OS owns contracts, policy, state, evidence, and orchestration. Models, coding harnesses, storage systems, databases, messaging services, calendars, search services, and deployment systems are replaceable adapters.
+
+A provider outage or change must result in a bounded failure, a configured fallback, or human escalation. It must not alter constitutional authority.
+
+## 9. Change to the Constitution
 
 Constitutional changes require:
 
