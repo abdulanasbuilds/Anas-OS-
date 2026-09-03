@@ -54,24 +54,25 @@ export async function loadRuntime() {
   return { engine, agents: toMap(agentRegistry.agents ?? []), tools: toMap(toolRegistry.tools ?? []), adapters };
 }
 
-export async function executeGoal({ plan, runtime = await loadRuntime(), context = {} } = {}) {
+export async function executeGoal({ plan, runtime, context = {} } = {}) {
   if (!plan?.plan?.tasks) throw new Error('A planned goal is required');
+  const activeRuntime = runtime ?? await loadRuntime();
   const results = [];
   const completed = new Set();
   for (const batch of plan.batches ?? []) {
     for (const task of batch) {
       const unmet = (task.dependsOn ?? []).filter(dep => !completed.has(dep));
       if (unmet.length) { results.push({ taskId: task.id, status: 'blocked', reason: 'dependency-not-completed', unmetDependencies: unmet }); continue; }
-      const agent = runtime.agents.get(task.agentId);
+      const agent = activeRuntime.agents.get(task.agentId);
       if (!agent) throw new Error(`Unknown planned agent: ${task.agentId}`);
       const authority = agent.approvalLevel === 'human_only' ? 'human-only' : agent.approvalLevel === 'approval_required' ? 'approval-required' : 'autonomous';
-      const request = runtime.engine.buildRequest({ taskId: task.id, agentId: task.agentId, objective: task.objective, authority, context });
+      const request = activeRuntime.engine.buildRequest({ taskId: task.id, agentId: task.agentId, objective: task.objective, authority, context });
       const requiresApproval = authority !== 'autonomous' || plan.approvalRequired;
       if (requiresApproval) { results.push({ taskId: task.id, status: 'approval-required', reason: 'Consequential execution must be explicitly approved before a mutating or external action.' }); continue; }
       const toolId = task.agentId === 'qa' ? 'test.run' : 'git.inspect';
-      const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: authority, requiredAuthority: runtime.tools.get(toolId)?.authority ?? 'autonomous', action: `goal:${task.id}` });
+      const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: authority, requiredAuthority: activeRuntime.tools.get(toolId)?.authority ?? 'autonomous', action: `goal:${task.id}` });
       if (!authorization.allowed) { results.push({ taskId: task.id, status: 'blocked', authorization }); continue; }
-      const result = await runtime.engine.invoke(request, toolId);
+      const result = await activeRuntime.engine.invoke(request, toolId);
       results.push({ taskId: task.id, status: 'completed', tool: toolId, result });
       completed.add(task.id);
     }
