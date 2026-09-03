@@ -11,18 +11,17 @@ import { advise } from './engine/advisor.mjs';
 import { captureWorkflow, writeWorkflowCapture } from './engine/workflow-capture.mjs';
 import { analyzeChiefOfStaff } from './engine/chief-of-staff.mjs';
 import { listSchedules, runSchedule } from './engine/scheduler.mjs';
+import { planGoal } from './engine/operating-loop.mjs';
 
 const ROOT = path.dirname(path.dirname(fileURLToPath(import.meta.url)));
 const [, , command, ...args] = process.argv;
-
-function usage() { console.log(`ANAS OS Runtime\n\nCore:\n  help\n  validate-repo\n  validate-project <manifest.json>\n  gates <manifest.json>\n  transition <from> <to>\n  stages\n  inventory\n  doctor\n\nAgent System:\n  skill list\n  skill inspect <id>\n\nPersonal Operating Layer:\n  advisor <question>\n  memory list\n  memory propose <text>\n  memory approve <id>\n  workflow capture <text-file>\n  chief-of-staff <notes-file>\n  scheduler list\n  scheduler run <id>\n`); }
+function usage() { console.log(`ANAS OS Runtime\n\nCore:\n  help\n  validate-repo\n  validate-project <manifest.json>\n  gates <manifest.json>\n  transition <from> <to>\n  stages\n  inventory\n  doctor\n\nAgent System:\n  skill list\n  skill inspect <id>\n\nPersonal Operating Layer:\n  goal <goal text>\n  advisor <question>\n  memory list\n  memory propose <text>\n  memory approve <id>\n  workflow capture <text-file>\n  chief-of-staff <notes-file>\n  scheduler list\n  scheduler run <id>\n`); }
 async function validateRepo() { const result = validateRepositoryShape(await walkFiles(ROOT)); console.log(JSON.stringify(result, null, 2)); if (!result.valid) process.exitCode=1; }
 async function validateProjectFile(file) { const result=validateProject(await loadJson(path.resolve(process.cwd(), file))); console.log(JSON.stringify(result,null,2)); if(!result.valid) process.exitCode=1; }
 async function gates(file) { const project=await loadJson(path.resolve(process.cwd(), file)); const results=evaluateAllGates(project, await loadGates(ROOT)); console.log(JSON.stringify(results,null,2)); if(results.some(r=>r.status==='blocked'||r.status==='fail')) process.exitCode=1; }
 async function inventory() { const files=await walkFiles(ROOT); const groups={}; for(const file of files){const top=file.split('/')[0]; groups[top]=(groups[top]??0)+1;} console.log(JSON.stringify({totalFiles:files.length,groups},null,2)); }
 async function doctor() { const required=[['package','package.json'],['constitution','00-foundation/constitution/CONSTITUTION.md'],['agent registry','02-domains/agent-system/registry/agents.json'],['skills','02-domains/agent-system/skills/README.md'],['memory policy','02-domains/agent-system/memory/memory-policy.md'],['runtime index','07-runtime/index.mjs'],['tests','09-tests/unit/kernel.test.mjs']]; const checks=[]; for(const [name,file] of required) checks.push([name,await exists(file)]); const result={checks:checks.map(([name,pass])=>({name,pass})),healthy:checks.every(([,pass])=>pass)}; console.log(JSON.stringify(result,null,2)); if(!result.healthy) process.exitCode=1; }
 async function exists(file){try{await fs.access(path.join(ROOT,file));return true;}catch{return false;}}
-
 try {
   if (command === 'help' || command === undefined) usage();
   else if (command === 'validate-repo') await validateRepo();
@@ -34,6 +33,7 @@ try {
   else if (command === 'doctor') await doctor();
   else if (command === 'skill' && args[0] === 'list') console.log(JSON.stringify(await listSkills(),null,2));
   else if (command === 'skill' && args[0] === 'inspect') console.log((await inspectSkill(args[1])).content);
+  else if (command === 'goal') console.log(JSON.stringify(await planGoal({goal:args.join(' ')}),null,2));
   else if (command === 'advisor') console.log(JSON.stringify(advise({question:args.join(' ')}),null,2));
   else if (command === 'memory' && args[0] === 'list') console.log(JSON.stringify(await readLearnings(),null,2));
   else if (command === 'memory' && args[0] === 'propose') console.log(JSON.stringify(await proposeLearning({text:args.slice(1).join(' ')}),null,2));
