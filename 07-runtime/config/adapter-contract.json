@@ -1,0 +1,11 @@
+{
+  "version": 1,
+  "required": ["id", "provider", "enabled", "mutating", "approvalPolicy"],
+  "states": ["not-configured", "adapter-ready", "approval-required", "completed", "failed"],
+  "rules": {
+    "unknownAdaptersFailClosed": true,
+    "credentialsNeverStoredInRepository": true,
+    "externalMutationsRequireApproval": true,
+    "noSimulatedSuccess": true
+  }
+}
