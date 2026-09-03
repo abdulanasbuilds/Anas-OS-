@@ -1,9 +1,9 @@
 {
   "name": "anas-os-core",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": true,
   "type": "module",
-  "description": "ANAS OS governance, kernel, native subsystems, Agent System, workflows and runtime",
+  "description": "ANAS OS governance, kernel, native subsystems, Agent System, workflows and executable operating runtime",
   "engines": { "node": ">=20" },
   "scripts": {
     "validate": "node 07-runtime/cli.mjs validate-repo",
@@ -12,6 +12,8 @@
     "test": "node --test 09-tests/**/*.test.mjs 09-tests/*.test.mjs",
     "help": "node 07-runtime/cli.mjs help",
     "doctor": "node 07-runtime/cli.mjs doctor",
-    "inventory": "node 07-runtime/cli.mjs inventory"
+    "self-check": "node 07-runtime/cli.mjs self-check",
+    "inventory": "node 07-runtime/cli.mjs inventory",
+    "run-goal": "node 07-runtime/cli.mjs run-goal"
   }
 }
