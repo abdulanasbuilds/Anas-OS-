@@ -11,11 +11,12 @@ test('runtime loads canonical agents, tools, and adapter boundary', async () => 
   assert.equal(runtime.adapters.policy.credentialsNeverStoredInRepository, true);
 });
 
-test('goal execution refuses consequential work until approval', async () => {
+test('goal execution enforces dependencies after an approval block', async () => {
   const plan = await planGoal({ goal: 'build a small testable prototype', risk: { likelihood: 1, impact: 1, exposure: 1, detectability: 5 } });
   const result = await executeGoal({ plan });
-  assert.ok(['awaiting-approval', 'completed'].includes(result.status));
-  assert.ok(result.results.length >= 1);
+  assert.equal(result.results[0].status, 'approval-required');
+  assert.equal(result.results[1].status, 'blocked');
+  assert.deepEqual(result.results[1].unmetDependencies, ['frame']);
 });
 
 test('system self-check is healthy', async () => {
