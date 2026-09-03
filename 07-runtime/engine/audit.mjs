@@ -1,6 +1,6 @@
 import fs from 'node:fs/promises';
 import path from 'node:path';
-import { ROOT } from './fs.mjs';
+import { ROOT } from '../fs.mjs';
 
 export function createAuditEvent({ type, actorType, actorId, objectType, objectId, data = {}, severity = 'info' }) {
   if (!type || !actorType || !actorId) throw new Error('Audit event requires type, actorType and actorId');
