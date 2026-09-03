@@ -2,7 +2,7 @@ import fs from 'node:fs/promises';
 import path from 'node:path';
 import { ROOT } from '../fs.mjs';
 import { loadRuntime } from './runtime.mjs';
-import { validateRepositoryShape, walkFiles } from './validate.mjs';
+import { validateRepositoryShape, walkFiles } from '../validate.mjs';
 
 export async function systemCheck() {
   const files = await walkFiles(ROOT);
