@@ -15,3 +15,5 @@ export { captureWorkflow, writeWorkflowCapture } from './engine/workflow-capture
 export { analyzeChiefOfStaff } from './engine/chief-of-staff.mjs';
 export { listSchedules, dueSchedules, runSchedule } from './engine/scheduler.mjs';
 export { planGoal } from './engine/operating-loop.mjs';
+export { loadRuntime, executeGoal } from './engine/runtime.mjs';
+export { systemCheck } from './engine/system-check.mjs';
