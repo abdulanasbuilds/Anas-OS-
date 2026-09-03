@@ -1,5 +1,5 @@
 {
-  "version":"1.0.0",
+  "version":"1.1.0",
   "tools":[
     {"id":"filesystem.read","authority":"autonomous","mutates":false,"description":"Read repository or project files"},
     {"id":"filesystem.write","authority":"autonomous","mutates":true,"scope":"approved-task"},
@@ -11,6 +11,8 @@
     {"id":"production.data.delete","authority":"human-only","mutates":true},
     {"id":"credential.export","authority":"forbidden","mutates":false},
     {"id":"test.run","authority":"autonomous","mutates":false},
-    {"id":"web.research","authority":"autonomous","mutates":false}
+    {"id":"web.research","authority":"autonomous","mutates":false},
+    {"id":"ai.respond","authority":"autonomous","mutates":false,"description":"Model-backed operator reasoning through an explicit provider adapter"},
+    {"id":"audio.transcribe","authority":"autonomous","mutates":false,"description":"Speech-to-text through an explicit provider adapter"}
   ]
 }
