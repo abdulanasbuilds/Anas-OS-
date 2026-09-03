@@ -1,0 +1,15 @@
+{
+  "version": 1,
+  "execution": {
+    "localRepositoryActions": true,
+    "externalProviderActions": "adapter-gated",
+    "consequentialActions": "approval-gated",
+    "verificationRequired": true,
+    "evidenceRequiredForStateTransition": true
+  },
+  "selfImprovement": {
+    "mode": "proposal-first",
+    "humanApprovalRequired": true,
+    "protectedArtifacts": ["constitution", "authority", "security", "approval-policy", "financial-controls", "legal-controls"]
+  }
+}
