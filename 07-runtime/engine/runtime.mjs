@@ -5,6 +5,7 @@ import { ROOT } from '../fs.mjs';
 import { ExecutionEngine } from './execution-engine.mjs';
 import { appendAuditEvent, createAuditEvent } from './audit.mjs';
 import { authorizeAction } from './authority.mjs';
+import { invokeProvider } from './providers.mjs';
 
 const AGENTS = path.join(ROOT, '02-domains/agent-system/registry/agents.json');
 const TOOLS = path.join(ROOT, '02-domains/agent-system/registry/tools.json');
@@ -34,6 +35,13 @@ function shellCommand(command, args = []) {
   });
 }
 
+async function providerTool(def, input) {
+  const operation = def.id === 'audio.transcribe' ? 'transcription' : 'structured-response';
+  const family = def.id === 'audio.transcribe' ? 'transcription' : 'ai';
+  const capability = def.id === 'audio.transcribe' ? 'audio-transcription' : 'structured-response';
+  return invokeProvider({ family, capability, operation, input, allowNetwork: input?.allowNetwork !== false });
+}
+
 export async function loadRuntime() {
   const [agentRegistry, toolRegistry, adapters] = await Promise.all([read(AGENTS), read(TOOLS), read(ADAPTERS)]);
   const engine = new ExecutionEngine({ agents: new Map(), tools: new Map(), audit: event => appendAuditEvent(createAuditEvent({
@@ -49,6 +57,7 @@ export async function loadRuntime() {
     }));
     else if (def.id === 'test.run') engine.registerTool(wrapTool(def, async () => shellCommand('npm', ['test'])));
     else if (def.id === 'git.inspect') engine.registerTool(wrapTool(def, async () => shellCommand('git', ['status', '--short', '--branch'])));
+    else if (def.id === 'ai.respond' || def.id === 'audio.transcribe') engine.registerTool(wrapTool(def, async input => providerTool(def, input ?? {})));
     else engine.registerTool(wrapTool(def, async () => ({ status: 'not-configured', tool: def.id, configured: Boolean(adapters.adapters?.[def.id]?.enabled) })));
   }
   return { engine, agents: toMap(agentRegistry.agents ?? []), tools: toMap(toolRegistry.tools ?? []), adapters };
@@ -69,15 +78,17 @@ export async function executeGoal({ plan, runtime, context = {} } = {}) {
       const request = activeRuntime.engine.buildRequest({ taskId: task.id, agentId: task.agentId, objective: task.objective, authority, context });
       const requiresApproval = authority !== 'autonomous' || plan.approvalRequired;
       if (requiresApproval) { results.push({ taskId: task.id, status: 'approval-required', reason: 'Consequential execution must be explicitly approved before a mutating or external action.' }); continue; }
-      const toolId = task.agentId === 'qa' ? 'test.run' : 'git.inspect';
+      const toolId = task.toolId ?? (task.agentId === 'qa' ? 'test.run' : task.agentId === 'strategist' ? 'ai.respond' : 'git.inspect');
       const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: authority, requiredAuthority: activeRuntime.tools.get(toolId)?.authority ?? 'autonomous', action: `goal:${task.id}` });
       if (!authorization.allowed) { results.push({ taskId: task.id, status: 'blocked', authorization }); continue; }
-      const result = await activeRuntime.engine.invoke(request, toolId);
-      results.push({ taskId: task.id, status: 'completed', tool: toolId, result });
-      completed.add(task.id);
+      const result = await activeRuntime.engine.invoke(request, toolId, { prompt: task.objective, context });
+      const providerNotConfigured = result?.result?.status === 'not-configured';
+      results.push({ taskId: task.id, status: providerNotConfigured ? 'not-configured' : 'completed', tool: toolId, result });
+      if (!providerNotConfigured) completed.add(task.id);
     }
   }
   const hasBlocked = results.some(r => r.status === 'blocked');
   const awaitingApproval = results.some(r => r.status === 'approval-required');
-  return { goal: plan.goal, completed: [...completed], results, status: hasBlocked ? 'blocked' : awaitingApproval ? 'awaiting-approval' : 'completed' };
+  const notConfigured = results.some(r => r.status === 'not-configured');
+  return { goal: plan.goal, completed: [...completed], results, status: hasBlocked ? 'blocked' : awaitingApproval ? 'awaiting-approval' : notConfigured ? 'not-configured' : 'completed' };
 }
