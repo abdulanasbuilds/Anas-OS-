@@ -18,3 +18,6 @@ export { planGoal } from './engine/operating-loop.mjs';
 export { loadRuntime, executeGoal } from './engine/runtime.mjs';
 export { systemCheck } from './engine/system-check.mjs';
 export { listProviders, selectProvider, invokeProvider } from './engine/providers.mjs';
+export { scoreDistribution, evaluateContentAsset, buildDistributionExperiment } from './engine/distribution.mjs';
+export { createResolutionState, classifyDepartment, buildTrial, capacityModel, chooseDeliveryPath, stageRecommendation } from './engine/resolution.mjs';
+export { planBriefing, planWeeklyReview } from './engine/briefing.mjs';
