@@ -6,7 +6,7 @@ ANAS OS is the decision, governance, execution, evidence, and learning operating
 
 ## Architectural law
 
-There is exactly one operating system: ANAS OS. Business, Product, Agent System, Engineering, AI, Data, Research, Customer, Security, Operations, Growth, Finance, Automation, Infrastructure, Governance, Distribution, Resolution, and System Evolution are native subsystems. They do not have independent authority.
+There is exactly one operating system: ANAS OS. Business, Product, Agent System, Engineering, AI, Data, Research, Customer, Security, Operations, Growth, Finance, Automation, Infrastructure, Governance, Distribution, Resolution, Flywheel, and System Evolution are native subsystems. They do not have independent authority.
 
 ## Runtime boundary
 
@@ -23,7 +23,7 @@ CANONICAL STATE + OBJECT MODEL
     ↓
 NATIVE SUBSYSTEMS
     ↓
-DISTRIBUTION ↔ RESOLUTION
+DISTRIBUTION ↔ RESOLUTION ↔ FLYWHEEL
     ↓
 WORKFLOWS
     ↓
@@ -46,7 +46,7 @@ ANAS OS
 
 The Agent System is the mature Agent OS capability set embedded as a first-class ANAS OS subsystem. It preserves registry, roles, contracts, skills, harnesses, permissions, context, memory, planning, decomposition, orchestration, handoffs, parallelism, verification, recovery, escalation, auditability, evaluation, cost tracking, and observability, while adding kernel-governed business, project, product, security, financial, legal, vendor, evidence, and production context.
 
-## Digital twins of the two supplied operating models
+## Digital twins of the three supplied operating models
 
 ### Distribution Engine
 
@@ -56,23 +56,43 @@ Digitalizes the first transcript's distribution model: useful content creates re
 
 Digitalizes the second transcript's project model: uncertain projects begin with a low-resolution map, then gain resolution through bounded R&D, minimum viable teams, vertical slices, feedback, capacity math, and progressively denser organization design. Scaling follows evidence rather than hope.
 
+### Flywheel Engine
+
+Digitalizes the third transcript's business flywheel: distribution attracts customers, talent, partnerships, and attention; talented teams create trusted outcomes; outcomes create cash; approved surplus funds bounded R&D; R&D becomes reusable capability, tools, and playbooks; better capability improves outputs, which create new distribution and resolution signals.
+
+The engine also operationalizes five recurring systems from the transcript: trust, talent, customer value, economics, and experimentation. Trust is treated as a proxy system, not a directly measurable number. AI is treated as a tool or format selected for workflow value, not as an automatic replacement for human judgment.
+
 ### Their relationship
 
 ```text
-Product/project work
-      ↓
-Prototype / pilot / content / release
-      ↓
-Distribution
-      ↓
-Audience + feedback + opportunities + talent
-      ↓
-Higher project resolution
-      ↓
-Better team / product / technology decisions
-      ↓
-Better outputs
-      ↺
+             ┌──────────────────────────┐
+             │        DISTRIBUTION      │
+             │ attention • trust •      │
+             │ opportunities • talent   │
+             └────────────┬─────────────┘
+                          ↓
+                 feedback + demand
+                          ↓
+             ┌──────────────────────────┐
+             │       RESOLUTION        │
+             │ experiments • product   │
+             │ shape • team • capacity │
+             └────────────┬─────────────┘
+                          ↓
+                  better outputs
+                          ↓
+             ┌──────────────────────────┐
+             │         FLYWHEEL         │
+             │ talent • trust • cash   │
+             │ R&D • capability        │
+             └────────────┬─────────────┘
+                          ↓
+                 reusable capability
+                          ↓
+                better work / content
+                          ↓
+                     DISTRIBUTION
+                          ↺
 ```
 
 ## Core invariants
@@ -88,4 +108,4 @@ Better outputs
 9. Production readiness is a verified state, not a claim.
 10. System evolution is proposed by evidence and adopted only through governance.
 11. Numeric heuristics from external frameworks are configurable hypotheses until validated with ANAS evidence.
-12. Distribution and resolution remain advisory/planning capabilities; kernel policy and authority remain sovereign.
+12. Distribution, resolution, and flywheel engines remain advisory/planning capabilities; kernel policy and authority remain sovereign.
