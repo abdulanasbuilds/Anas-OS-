@@ -21,6 +21,7 @@ jobs:
           const paths=[
             'package.json','config/anas-os.json','config/domain-registry.json',
             'config/canonical-architecture.json','config/canonical-domain-registry.json',
+            'config/digital-engine-registry.json',
             '01-kernel/policies/policy-registry.json','01-kernel/policies/gate-registry.json',
             '01-kernel/objects/registry.json','02-domains/agent-system/registry/agents.json',
             '02-domains/agent-system/registry/specialists.json','02-domains/agent-system/registry/skills.json',
@@ -41,5 +42,11 @@ jobs:
         run: npm run doctor
       - name: Runtime self-check
         run: npm run self-check
+      - name: Comprehensive readiness
+        run: npm run readiness
       - name: Provider fallback smoke test
         run: node 07-runtime/cli.mjs provider list ai
+      - name: Digital engine smoke tests
+        run: |
+          printf '{"trust":80,"talent":80,"distribution":80,"economics":80,"experimentation":80}' > /tmp/flywheel.json
+          node 07-runtime/cli.mjs flywheel assess /tmp/flywheel.json
