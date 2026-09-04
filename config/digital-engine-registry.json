@@ -1,0 +1,8 @@
+{
+  "version":"1.0.0",
+  "engines":[
+    {"id":"distribution","name":"Distribution Engine","domain":"growth","source":"video-1","purpose":"Treat content and distribution as a compounding surface for trust, opportunities, customers, talent, and partnerships.","inputs":["content-assets","audience","channels","touchpoints","trust-signals","opportunities","results"],"outputs":["distribution-scorecard","experiments","opportunity-log","conversion-signals","learnings"]},
+    {"id":"resolution","name":"Resolution Project Engine","domain":"project","source":"video-2","purpose":"Move uncertain projects from low-resolution assumptions to evidence-backed organizational and product resolution through bounded experiments.","inputs":["project","departments","roles","trials","vertical-slices","capacity","feedback","economics"],"outputs":["resolution-state","team-graph","capacity-model","decision-log","stage-recommendation","playbook"]}
+  ],
+  "integration":"Distribution is a feedback and opportunity input to Resolution. Resolution produces prototypes, pilots, launches, and artifacts that create new Distribution touchpoints. Both remain governed by the ANAS OS kernel."
+}
