@@ -38,6 +38,7 @@ export function validateRepositoryShape(treePaths){
     '02-domains/agent-system/memory/memory-policy.md',
     '03-workflows/project-lifecycle.json',
     '03-workflows/workflow-registry.json',
+    '03-workflows/distribution-resolution-loop.md',
     '04-contracts/agents/execution-request.schema.json',
     '04-contracts/agents/agent.schema.json',
     '04-contracts/tools/tool.schema.json',
@@ -51,8 +52,12 @@ export function validateRepositoryShape(treePaths){
     '07-runtime/engine/providers.mjs',
     '07-runtime/engine/briefing.mjs',
     '07-runtime/engine/scheduler.mjs',
+    '07-runtime/engine/distribution.mjs',
+    '07-runtime/engine/resolution.mjs',
     '07-runtime/config/schedules.json',
+    'config/digital-engine-registry.json',
     '09-tests/unit/kernel.test.mjs',
+    '09-tests/unit/distribution-resolution.test.mjs',
     '10-tooling/validators/repository-validator.mjs',
     '11-docs/architecture/canonical-architecture.md'
   ];
