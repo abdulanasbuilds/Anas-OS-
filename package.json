@@ -1,6 +1,6 @@
 {
   "name": "anas-os-core",
-  "version": "1.1.0",
+  "version": "1.1.1",
   "private": true,
   "type": "module",
   "description": "ANAS OS governance, kernel, native subsystems, Agent System, workflows and executable operating runtime",
@@ -13,6 +13,7 @@
     "help": "node 07-runtime/cli.mjs help",
     "doctor": "node 07-runtime/cli.mjs doctor",
     "self-check": "node 07-runtime/cli.mjs self-check",
+    "readiness": "node 07-runtime/cli.mjs readiness",
     "inventory": "node 07-runtime/cli.mjs inventory",
     "run-goal": "node 07-runtime/cli.mjs run-goal"
   }
