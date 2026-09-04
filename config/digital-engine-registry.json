@@ -1,8 +1,9 @@
 {
-  "version":"1.0.0",
+  "version":"1.1.0",
   "engines":[
     {"id":"distribution","name":"Distribution Engine","domain":"growth","source":"video-1","purpose":"Treat content and distribution as a compounding surface for trust, opportunities, customers, talent, and partnerships.","inputs":["content-assets","audience","channels","touchpoints","trust-signals","opportunities","results"],"outputs":["distribution-scorecard","experiments","opportunity-log","conversion-signals","learnings"]},
-    {"id":"resolution","name":"Resolution Project Engine","domain":"project","source":"video-2","purpose":"Move uncertain projects from low-resolution assumptions to evidence-backed organizational and product resolution through bounded experiments.","inputs":["project","departments","roles","trials","vertical-slices","capacity","feedback","economics"],"outputs":["resolution-state","team-graph","capacity-model","decision-log","stage-recommendation","playbook"]}
+    {"id":"resolution","name":"Resolution Project Engine","domain":"project","source":"video-2","purpose":"Move uncertain projects from low-resolution assumptions to evidence-backed organizational and product resolution through bounded experiments.","inputs":["project","departments","roles","trials","vertical-slices","capacity","feedback","economics"],"outputs":["resolution-state","team-graph","capacity-model","decision-log","stage-recommendation","playbook"]},
+    {"id":"flywheel","name":"Flywheel Engine","domain":"business","source":"video-3","purpose":"Connect distribution, talent, trust, customer value, cash generation, bounded R&D, reusable capability, and improved outputs into a governed compounding operating loop.","inputs":["distribution","talent","trust","customers","outcomes","economics","r-and-d","capabilities","feedback"],"outputs":["flywheel-state","talent-assessment","trust-proxy","rnd-portfolio","learning-signals","capability-loop"]}
   ],
-  "integration":"Distribution is a feedback and opportunity input to Resolution. Resolution produces prototypes, pilots, launches, and artifacts that create new Distribution touchpoints. Both remain governed by the ANAS OS kernel."
+  "integration":"Distribution creates audience, trust, opportunity, feedback, and talent flow. Resolution turns uncertainty into validated projects and delivery decisions. Flywheel connects those flows to talent systems, customer value, cash generation, bounded R&D, reusable capability, and better outputs. All remain governed by the ANAS OS kernel."
 }
