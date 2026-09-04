@@ -20,4 +20,5 @@ export { systemCheck } from './engine/system-check.mjs';
 export { listProviders, selectProvider, invokeProvider } from './engine/providers.mjs';
 export { scoreDistribution, evaluateContentAsset, buildDistributionExperiment } from './engine/distribution.mjs';
 export { createResolutionState, classifyDepartment, buildTrial, capacityModel, chooseDeliveryPath, stageRecommendation } from './engine/resolution.mjs';
+export { assessFlywheel, mapFlywheel, scoreTrust, evaluateTalentSystem, buildRAndDPortfolio, compareExperimentLearning } from './engine/flywheel.mjs';
 export { planBriefing, planWeeklyReview } from './engine/briefing.mjs';
