@@ -1,0 +1,52 @@
+{
+  "version": "1.0.0",
+  "policy": {
+    "coreProviderRequired": false,
+    "commercialProviderRequired": false,
+    "defaultSelection": "capability-first",
+    "credentialsSource": "environment-or-external-secret-store",
+    "credentialsNeverStoredInRepository": true,
+    "externalMutationApprovalRequired": true
+  },
+  "providers": [
+    {
+      "id": "builtin.local",
+      "family": "ai",
+      "capabilities": ["structured-response", "dry-run"],
+      "class": "local",
+      "cost": "zero",
+      "network": false,
+      "state": "available",
+      "priority": 100
+    },
+    {
+      "id": "generic.http-ai",
+      "family": "ai",
+      "capabilities": ["chat", "structured-response"],
+      "class": "external",
+      "cost": "variable",
+      "network": true,
+      "state": "available_when_configured",
+      "priority": 50,
+      "configuration": {
+        "endpointEnv": "ANAS_AI_ENDPOINT",
+        "apiKeyEnv": "ANAS_AI_API_KEY",
+        "modelEnv": "ANAS_AI_MODEL"
+      }
+    },
+    {
+      "id": "generic.http-transcription",
+      "family": "transcription",
+      "capabilities": ["audio-transcription"],
+      "class": "external",
+      "cost": "variable",
+      "network": true,
+      "state": "available_when_configured",
+      "priority": 50,
+      "configuration": {
+        "endpointEnv": "ANAS_TRANSCRIPTION_ENDPOINT",
+        "apiKeyEnv": "ANAS_TRANSCRIPTION_API_KEY"
+      }
+    }
+  ]
+}
