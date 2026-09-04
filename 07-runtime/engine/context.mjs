@@ -1,4 +1,4 @@
-import { readJson } from '../07-runtime/fs.mjs';
+import { readJson } from '../fs.mjs';
 
 export async function loadRegistry(path) { return readJson(path); }
 
