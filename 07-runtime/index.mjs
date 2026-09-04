@@ -1,13 +1,13 @@
-export { ExecutionEngine } from './execution-engine.mjs';
-export { authorizeAction } from './authority.mjs';
-export { assembleAgentContext } from './context.mjs';
-export { createAuditEvent, appendAuditEvent } from './audit.mjs';
-export { createEvidence, evaluateEvidenceRequirements } from './evidence.mjs';
-export { requestApproval, resolveApproval, isApprovalValid } from './approval.mjs';
-export { createWorkflow, runWorkflow } from './workflow.mjs';
-export { validateExecutionPlan, createExecutionPlan, readyTasks, executionBatches } from './orchestration.mjs';
-export { STAGES, canTransition, assertTransition, transitionState } from './lifecycle.mjs';
-export { scoreRisk, riskRequiresApproval } from './risk.mjs';
+export { ExecutionEngine } from './engine/execution-engine.mjs';
+export { authorizeAction } from './engine/authority.mjs';
+export { assembleAgentContext } from './engine/context.mjs';
+export { createAuditEvent, appendAuditEvent } from './engine/audit.mjs';
+export { createEvidence, evaluateEvidenceRequirements } from './engine/evidence.mjs';
+export { requestApproval, resolveApproval, isApprovalValid } from './engine/approval.mjs';
+export { createWorkflow, runWorkflow } from './engine/workflow.mjs';
+export { validateExecutionPlan, createExecutionPlan, readyTasks, executionBatches } from './engine/orchestration.mjs';
+export { STAGES, canTransition, assertTransition, transitionState } from './engine/lifecycle.mjs';
+export { scoreRisk, riskRequiresApproval } from './engine/risk.mjs';
 export { listSkills, inspectSkill } from './engine/skills.mjs';
 export { readLearnings, proposeLearning, approveLearning } from './engine/memory.mjs';
 export { advise } from './engine/advisor.mjs';
@@ -17,3 +17,4 @@ export { listSchedules, dueSchedules, runSchedule } from './engine/scheduler.mjs
 export { planGoal } from './engine/operating-loop.mjs';
 export { loadRuntime, executeGoal } from './engine/runtime.mjs';
 export { systemCheck } from './engine/system-check.mjs';
+export { listProviders, selectProvider, invokeProvider } from './engine/providers.mjs';
