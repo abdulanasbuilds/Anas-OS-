@@ -25,6 +25,7 @@ jobs:
             '01-kernel/objects/registry.json','02-domains/agent-system/registry/agents.json',
             '02-domains/agent-system/registry/specialists.json','02-domains/agent-system/registry/skills.json',
             '02-domains/agent-system/registry/harnesses.json','02-domains/agent-system/registry/tools.json',
+            '02-domains/agent-system/providers/provider-registry.json',
             '03-workflows/project-lifecycle.json','03-workflows/workflow-registry.json',
             '04-contracts/agents/execution-request.schema.json','04-contracts/approvals/approval.schema.json',
             '05-templates/projects/standard/project.manifest.json'
@@ -38,3 +39,7 @@ jobs:
         run: npm run validate
       - name: Runtime doctor
         run: npm run doctor
+      - name: Runtime self-check
+        run: npm run self-check
+      - name: Provider fallback smoke test
+        run: node 07-runtime/cli.mjs provider list ai
