@@ -81,8 +81,8 @@ export async function executeGoal({ plan, runtime, context = {} } = {}) {
       const toolId = task.toolId ?? (task.agentId === 'qa' ? 'test.run' : task.agentId === 'strategist' ? 'ai.respond' : 'git.inspect');
       const authorization = authorizeAction({ agentAuthority: authority, taskAuthority: authority, requiredAuthority: activeRuntime.tools.get(toolId)?.authority ?? 'autonomous', action: `goal:${task.id}` });
       if (!authorization.allowed) { results.push({ taskId: task.id, status: 'blocked', authorization }); continue; }
-      const result = await activeRuntime.engine.invoke(request, toolId, { prompt: task.objective, context });
-      const providerNotConfigured = result?.result?.status === 'not-configured';
+      const result = await activeRuntime.engine.invoke(request, toolId, { prompt: task.objective, context, allowNetwork: false });
+      const providerNotConfigured = result?.status === 'not-configured';
       results.push({ taskId: task.id, status: providerNotConfigured ? 'not-configured' : 'completed', tool: toolId, result });
       if (!providerNotConfigured) completed.add(task.id);
     }
