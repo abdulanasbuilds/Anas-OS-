@@ -1,5 +1,5 @@
 {
-  "version":"1.0.0",
+  "version":"1.1.0",
   "skills":[
     {"id":"research","ownerDomain":"research","risk":"low"},
     {"id":"business-validation","ownerDomain":"business","risk":"medium"},
@@ -14,6 +14,8 @@
     {"id":"customer-research","ownerDomain":"customer","risk":"medium"},
     {"id":"unit-economics","ownerDomain":"finance","risk":"medium"},
     {"id":"compliance-review","ownerDomain":"legal","risk":"high"},
-    {"id":"system-improvement","ownerDomain":"system-evolution","risk":"high"}
+    {"id":"system-improvement","ownerDomain":"system-evolution","risk":"high"},
+    {"id":"distribution-engine","ownerDomain":"growth","risk":"medium"},
+    {"id":"resolution-project","ownerDomain":"project","risk":"medium"}
   ]
 }
